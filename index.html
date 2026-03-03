@@ -1,1088 +1,1509 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>IEEE Professional Profile</title>
+  <title>Yesica Giraldo — Candidata a Presidente IEEE Colombia 2027–2028</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    /* ===========================
-       CSS VARIABLES & RESET
-    =========================== */
+    /* ============================================================
+       1. VARIABLES GLOBALES — TEMA CLARO IEEE
+    ============================================================ */
     :root {
-      --navy: #001f3f;
-      --navy-mid: #003566;
-      --blue: #00629B;
-      --blue-light: #0077b6;
-      --gold: #F7B731;
-      --gold-dim: #c49a1a;
-      --cream: #f5f0e8;
-      --white: #ffffff;
-      --gray-dark: #1a1a2e;
-      --gray-mid: #16213e;
-      --text-muted: rgba(245,240,232,0.55);
-      --glow: rgba(247,183,49,0.18);
-      --font-display: 'Cormorant Garamond', serif;
-      --font-ui: 'Syne', sans-serif;
-      --font-mono: 'DM Mono', monospace;
+      --ieee-blue:   #005A9C;
+      --ieee-dark:   #003F87;
+      --ieee-mid:    #0066B2;
+      --ieee-pale:   #E8F1FA;
+      --ieee-pale2:  #D0E4F5;
+      --white:       #ffffff;
+      --off-white:   #F6F9FD;
+      --surface-alt: #F0F6FC;
+      --border:      #C8DDF0;
+      --border-mid:  #9BBEDD;
+      --text-dark:   #0D1B2A;
+      --text-mid:    #2C4A6E;
+      --text-muted:  #617D98;
+      --shadow-sm:   0 2px 8px rgba(0,63,135,0.08);
+      --shadow-md:   0 6px 24px rgba(0,63,135,0.12);
+      --shadow-lg:   0 16px 48px rgba(0,63,135,0.16);
+
+      /* Espaciado relativo base */
+      --section-pad-v: clamp(3rem, 7vw, 6rem);
+      --section-pad-h: clamp(1.25rem, 5vw, 5rem);
+      --card-pad:      clamp(1.2rem, 2.5vw, 2rem);
+      --gap-grid:      clamp(1rem, 2vw, 1.5rem);
+
+      --font-display: 'Playfair Display', serif;
+      --font-body:    'DM Sans', sans-serif;
+      --font-mono:    'DM Mono', monospace;
     }
 
+    /* ============================================================
+       2. RESET & BASE
+    ============================================================ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; font-size: 16px; }
 
     body {
-      background: var(--navy);
-      color: var(--cream);
-      font-family: var(--font-ui);
+      background: var(--off-white);
+      color: var(--text-dark);
+      font-family: var(--font-body);
       overflow-x: hidden;
       cursor: none;
+      line-height: 1.6;
     }
 
-    /* ===========================
-       CUSTOM CURSOR
-    =========================== */
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    /* ============================================================
+       3. CURSOR (solo desktop)
+    ============================================================ */
     .cursor {
-      width: 12px; height: 12px;
+      width: 0.625rem; height: 0.625rem;
       border-radius: 50%;
-      background: var(--gold);
+      background: var(--ieee-blue);
       position: fixed; top: 0; left: 0;
       pointer-events: none; z-index: 9999;
-      transform: translate(-50%, -50%);
+      transform: translate(-50%,-50%);
       transition: transform 0.1s ease;
-      mix-blend-mode: difference;
     }
     .cursor-ring {
-      width: 38px; height: 38px;
+      width: 2.125rem; height: 2.125rem;
       border-radius: 50%;
-      border: 1px solid rgba(247,183,49,0.5);
+      border: 1.5px solid rgba(0,90,156,0.4);
       position: fixed; top: 0; left: 0;
       pointer-events: none; z-index: 9998;
-      transform: translate(-50%, -50%);
+      transform: translate(-50%,-50%);
       transition: all 0.18s ease;
     }
 
-    /* ===========================
-       CANVAS BACKGROUND
-    =========================== */
+    /* ============================================================
+       4. CANVAS FONDO
+    ============================================================ */
     #canvas-bg {
-      position: fixed;
-      top: 0; left: 0;
+      position: fixed; inset: 0;
       width: 100%; height: 100%;
-      z-index: 0;
-      pointer-events: none;
+      z-index: 0; pointer-events: none; opacity: 0.55;
     }
 
-    /* ===========================
-       NAVIGATION
-    =========================== */
+    /* ============================================================
+       5. NAVEGACIÓN — completamente fluida
+    ============================================================ */
     nav {
       position: fixed; top: 0; left: 0; right: 0;
       z-index: 100;
-      padding: 1.2rem 4rem;
+      padding: clamp(0.75rem,2vw,1.2rem) var(--section-pad-h);
       display: flex; align-items: center; justify-content: space-between;
       transition: all 0.4s ease;
     }
     nav.scrolled {
-      background: rgba(0, 31, 63, 0.92);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(247,183,49,0.15);
-      padding: 0.8rem 4rem;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
     }
     .nav-logo {
       font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: var(--gold);
-      letter-spacing: 0.2em;
+      font-size: clamp(0.6rem, 1.2vw, 0.72rem);
+      color: var(--ieee-blue);
+      letter-spacing: 0.22em;
       text-transform: uppercase;
+      font-weight: 500;
+      white-space: nowrap;
     }
     .nav-links {
-      display: flex; gap: 2.5rem; list-style: none;
+      display: flex; gap: clamp(1rem, 3vw, 2.5rem); list-style: none;
     }
     .nav-links a {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      letter-spacing: 0.18em;
-      color: var(--text-muted);
+      font-family: var(--font-body);
+      font-size: clamp(0.7rem, 1.3vw, 0.8rem);
+      font-weight: 500;
+      color: var(--text-mid);
       text-decoration: none;
-      text-transform: uppercase;
-      transition: color 0.3s;
-      position: relative;
+      transition: color 0.25s;
+      position: relative; white-space: nowrap;
     }
     .nav-links a::after {
-      content: '';
-      position: absolute; bottom: -3px; left: 0;
-      width: 0; height: 1px;
-      background: var(--gold);
+      content: ''; position: absolute;
+      bottom: -3px; left: 0;
+      width: 0; height: 2px;
+      background: var(--ieee-blue); border-radius: 2px;
       transition: width 0.3s ease;
     }
-    .nav-links a:hover { color: var(--gold); }
+    .nav-links a:hover { color: var(--ieee-blue); }
     .nav-links a:hover::after { width: 100%; }
 
-    /* ===========================
-       HERO
-    =========================== */
+    /* Hamburger móvil */
+    .nav-toggle {
+      display: none;
+      flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 4px;
+      background: none; border: none;
+    }
+    .nav-toggle span {
+      display: block; width: 22px; height: 2px;
+      background: var(--ieee-blue); border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    /* ============================================================
+       6. HERO — gradiente azul rey a blanco
+    ============================================================ */
     #hero {
       position: relative; z-index: 1;
-      min-height: 100vh;
+      min-height: 100svh;
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
       text-align: center;
-      padding: 2rem;
+      padding: clamp(6rem,12vw,10rem) var(--section-pad-h) clamp(4rem,8vw,6rem);
+      background: linear-gradient(150deg,
+        var(--ieee-dark) 0%, var(--ieee-blue) 38%,
+        #1a7abf 58%, var(--off-white) 100%);
       overflow: hidden;
     }
-    .hero-badge {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.35em;
-      color: var(--gold);
-      text-transform: uppercase;
-      margin-bottom: 1.5rem;
-      opacity: 0;
-      animation: fadeUp 0.8s 0.3s forwards;
-      display: flex; align-items: center; gap: 0.7rem;
-    }
-    .hero-badge::before, .hero-badge::after {
+    #hero::before {
       content: '';
-      display: inline-block;
-      width: 2rem; height: 1px;
-      background: var(--gold);
-      opacity: 0.5;
-    }
-    .hero-name {
-      font-family: var(--font-display);
-      font-size: clamp(3.5rem, 9vw, 8rem);
-      font-weight: 300;
-      line-height: 1;
-      letter-spacing: -0.02em;
-      color: var(--white);
-      opacity: 0;
-      animation: fadeUp 0.9s 0.55s forwards;
-      margin-bottom: 0.3rem;
-    }
-    .hero-name em {
-      font-style: italic;
-      color: var(--gold);
-    }
-    .hero-tagline {
-      font-family: var(--font-display);
-      font-size: clamp(1.1rem, 2.5vw, 1.6rem);
-      font-style: italic;
-      font-weight: 300;
-      color: var(--text-muted);
-      opacity: 0;
-      animation: fadeUp 0.9s 0.75s forwards;
-      margin-bottom: 3rem;
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(circle at 72% 30%, rgba(255,255,255,0.07) 0%, transparent 60%),
+        radial-gradient(circle at 20% 80%, rgba(0,63,135,0.3) 0%, transparent 50%);
+      pointer-events: none;
     }
 
-    /* Stats bar */
-    .hero-stats {
-      display: flex; gap: 3rem;
-      opacity: 0;
-      animation: fadeUp 0.9s 1s forwards;
+    /* Foto circular */
+    .profile-photo-wrapper {
+      opacity: 0; animation: fadeUp 0.7s 0.1s forwards;
+      margin-bottom: clamp(1rem,3vw,1.8rem);
     }
-    .stat-item { text-align: center; }
+    .profile-photo-circle {
+      width: clamp(100px, 16vw, 150px);
+      height: clamp(100px, 16vw, 150px);
+      border-radius: 50%;
+      border: 4px solid rgba(255,255,255,0.9);
+      box-shadow: 0 0 0 8px rgba(255,255,255,0.18), 0 1.25rem 3.75rem rgba(0,0,0,0.25);
+      overflow: hidden;
+      margin: 0 auto;
+      background: linear-gradient(135deg, var(--ieee-dark), var(--ieee-mid));
+      display: flex; align-items: center; justify-content: center;
+    }
+    .profile-photo-placeholder {
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      color: rgba(255,255,255,0.4);
+    }
+
+    .hero-badge {
+      font-family: var(--font-mono);
+      font-size: clamp(0.55rem, 1.2vw, 0.62rem);
+      letter-spacing: 0.3em; color: rgba(255,255,255,0.75);
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+      opacity: 0; animation: fadeUp 0.8s 0.3s forwards;
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+    .hero-badge::before, .hero-badge::after {
+      content: ''; display: inline-block;
+      width: clamp(1.2rem, 3vw, 2.5rem); height: 1px;
+      background: rgba(255,255,255,0.4);
+    }
+
+    .hero-name {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 7.5vw, 6.5rem);
+      font-weight: 400; line-height: 1.05;
+      color: var(--white);
+      opacity: 0; animation: fadeUp 0.9s 0.5s forwards;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.15);
+    }
+    .hero-name em { font-style: italic; color: rgba(255,255,255,0.85); }
+
+    .hero-candidacy {
+      font-family: var(--font-body);
+      font-size: clamp(0.85rem, 2.2vw, 1.35rem);
+      font-weight: 500; color: rgba(255,255,255,0.92);
+      opacity: 0; animation: fadeUp 0.9s 0.68s forwards;
+      margin-bottom: 0.6rem;
+    }
+    .hero-candidacy span {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 3px; padding: 0.1rem 0.6rem; font-weight: 600;
+    }
+
+    .hero-roles {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 0.3rem; opacity: 0; animation: fadeUp 0.9s 0.84s forwards;
+      margin-bottom: clamp(1rem,3vw,1.8rem);
+    }
+    .hero-role-item {
+      font-family: var(--font-mono);
+      font-size: clamp(0.52rem, 1.1vw, 0.63rem);
+      letter-spacing: 0.12em; color: rgba(255,255,255,0.65);
+      text-transform: uppercase;
+    }
+    .hero-role-item i { color: rgba(255,255,255,0.5); margin-right: 0.4rem; font-size: 0.5em; }
+
+    .hero-socials {
+      display: flex; gap: clamp(0.5rem,1.5vw,0.75rem); align-items: center;
+      opacity: 0; animation: fadeUp 0.9s 1s forwards;
+      margin-bottom: clamp(1rem,3vw,1.8rem);
+    }
+    .social-btn {
+      width: clamp(34px,5vw,40px); height: clamp(34px,5vw,40px);
+      border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,0.35);
+      background: rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.85);
+      font-size: clamp(0.75rem,1.5vw,0.88rem);
+      text-decoration: none; transition: all 0.3s ease;
+      backdrop-filter: blur(8px);
+    }
+    .social-btn:hover {
+      background: rgba(255,255,255,0.25);
+      border-color: rgba(255,255,255,0.7);
+      color: var(--white); transform: translateY(-3px);
+    }
+
+    .ieee-societies {
+      display: flex; gap: clamp(0.35rem,1vw,0.6rem); flex-wrap: wrap;
+      justify-content: center; align-items: center;
+      opacity: 0; animation: fadeUp 0.9s 1.12s forwards;
+      margin-bottom: clamp(1.5rem,4vw,3rem);
+      max-width: 56rem; width: 100%;
+    }
+    .society-badge {
+      font-family: var(--font-mono);
+      font-size: clamp(0.5rem, 1vw, 0.58rem);
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.3rem 0.8rem;
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 20px; color: rgba(255,255,255,0.8);
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(6px); transition: all 0.25s;
+    }
+    .society-badge:hover {
+      background: rgba(255,255,255,0.22);
+      border-color: rgba(255,255,255,0.6); color: var(--white);
+    }
+    .society-badge i { margin-right: 0.35rem; opacity: 0.8; }
+
+    /* Stats pill */
+    .hero-stats {
+      display: flex; align-items: stretch;
+      opacity: 0; animation: fadeUp 0.9s 1.28s forwards;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 0.75rem;
+      backdrop-filter: blur(12px);
+      overflow: hidden;
+      flex-wrap: wrap;
+      width: min(100%, 52rem);
+    }
+    .stat-item {
+      text-align: center;
+      padding: clamp(0.8rem,2vw,1.4rem) clamp(1rem,3vw,2.2rem);
+      flex: 1 1 clamp(100px, 20%, 160px);
+    }
     .stat-num {
       font-family: var(--font-display);
-      font-size: 2.8rem;
-      font-weight: 600;
-      color: var(--gold);
-      line-height: 1;
+      font-size: clamp(1.6rem, 4vw, 2.5rem);
+      font-weight: 600; color: var(--white); line-height: 1;
     }
     .stat-label {
       font-family: var(--font-mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.2em;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      margin-top: 0.3rem;
+      font-size: clamp(0.5rem, 1vw, 0.58rem);
+      letter-spacing: 0.18em; color: rgba(255,255,255,0.6);
+      text-transform: uppercase; margin-top: 0.35rem;
     }
     .stat-divider {
-      width: 1px; background: rgba(247,183,49,0.2);
+      width: 1px; background: rgba(255,255,255,0.15);
       align-self: stretch;
     }
 
     .scroll-hint {
-      position: absolute; bottom: 2.5rem;
-      display: flex; flex-direction: column; align-items: center;
-      gap: 0.5rem;
-      opacity: 0;
-      animation: fadeIn 1s 1.5s forwards;
+      position: absolute; bottom: 2rem;
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      opacity: 0; animation: fadeIn 1s 2s forwards;
     }
     .scroll-hint span {
       font-family: var(--font-mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.2em;
-      color: var(--text-muted);
-      text-transform: uppercase;
+      font-size: 0.58rem; letter-spacing: 0.2em;
+      color: rgba(255,255,255,0.5); text-transform: uppercase;
     }
     .scroll-line {
-      width: 1px; height: 3rem;
-      background: linear-gradient(to bottom, var(--gold), transparent);
+      width: 1px; height: 2.5rem;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent);
       animation: scrollPulse 2s infinite;
     }
 
-    /* ===========================
-       SECTION COMMON
-    =========================== */
+    /* ============================================================
+       7. SECCIONES GENÉRICAS
+    ============================================================ */
     section {
       position: relative; z-index: 1;
-      padding: 7rem 4rem;
+      padding: var(--section-pad-v) var(--section-pad-h);
     }
+    /* Alternancia cromática */
+    section:not(#hero):not(#propuestas):not(#compromisos):nth-child(odd)  { background: var(--white); }
+    section:not(#hero):not(#propuestas):not(#compromisos):nth-child(even) { background: var(--surface-alt); }
+
+    /* Contenedor central con max-width */
+    .container {
+      max-width: 75rem; /* 1200px */
+      margin: 0 auto;
+      width: 100%;
+    }
+
     .section-header {
-      display: flex; align-items: baseline; gap: 1.5rem;
-      margin-bottom: 4rem;
+      display: flex; align-items: baseline;
+      gap: clamp(0.6rem, 2vw, 1.2rem);
+      margin-bottom: clamp(2rem, 5vw, 3.5rem);
+      flex-wrap: wrap;
     }
     .section-label {
       font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.3em;
-      color: var(--gold);
-      text-transform: uppercase;
+      font-size: clamp(0.58rem, 1.1vw, 0.62rem);
+      letter-spacing: 0.28em; color: var(--ieee-blue);
+      text-transform: uppercase; font-weight: 500;
+      white-space: nowrap;
     }
     .section-title {
       font-family: var(--font-display);
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      font-weight: 300;
-      color: var(--white);
+      font-size: clamp(1.7rem, 4.5vw, 3.5rem);
+      font-weight: 400; color: var(--ieee-dark);
     }
-    .section-title em { font-style: italic; color: var(--gold); }
+    .section-title em { font-style: italic; color: var(--ieee-blue); }
     .section-line {
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(to right, rgba(247,183,49,0.3), transparent);
+      flex: 1; height: 1px;
+      background: linear-gradient(to right, var(--border-mid), transparent);
+      min-width: 2rem;
     }
 
-    /* ===========================
-       FILTER TABS
-    =========================== */
+    /* ============================================================
+       8. PROPUESTAS — CARDS
+    ============================================================ */
+    #propuestas {
+      background: var(--ieee-pale) !important;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .propuestas-intro {
+      text-align: center;
+      max-width: 40rem; margin: 0 auto clamp(2rem,5vw,3rem);
+    }
+    .propuestas-intro p { font-size: clamp(0.85rem,1.5vw,0.95rem); color: var(--text-mid); line-height: 1.85; }
+
+    .propuestas-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+      gap: var(--gap-grid);
+    }
+    .propuesta-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 0.625rem;
+      padding: var(--card-pad);
+      position: relative; overflow: hidden;
+      transition: all 0.32s ease;
+      opacity: 0; transform: translateY(1.375rem);
+      box-shadow: var(--shadow-sm);
+      display: flex; flex-direction: column;
+    }
+    .propuesta-card.visible { opacity: 1; transform: translateY(0); }
+    .propuesta-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--ieee-dark), var(--ieee-mid));
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.38s ease; border-radius: 0.625rem 0.625rem 0 0;
+    }
+    .propuesta-card:hover { border-color: var(--border-mid); box-shadow: var(--shadow-md); transform: translateY(-0.375rem); }
+    .propuesta-card:hover::before { transform: scaleX(1); }
+
+    .propuesta-icon {
+      width: clamp(2.5rem,5vw,3.25rem); height: clamp(2.5rem,5vw,3.25rem);
+      border-radius: 0.75rem;
+      background: var(--ieee-pale); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: clamp(1rem,2vw,1.2rem); color: var(--ieee-blue);
+      margin-bottom: 1.3rem; flex-shrink: 0;
+      transition: all 0.3s ease;
+    }
+    .propuesta-card:hover .propuesta-icon { background: var(--ieee-blue); color: var(--white); border-color: var(--ieee-blue); }
+    .propuesta-num { font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.2em; color: var(--ieee-blue); text-transform: uppercase; margin-bottom: 0.5rem; }
+    .propuesta-title { font-family: var(--font-display); font-size: clamp(1rem,2vw,1.2rem); font-weight: 600; color: var(--ieee-dark); line-height: 1.3; margin-bottom: 0.75rem; }
+    .propuesta-desc { font-size: clamp(0.78rem,1.3vw,0.82rem); color: var(--text-muted); line-height: 1.75; flex: 1; }
+    .propuesta-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.2rem; }
+    .propuesta-tag {
+      font-family: var(--font-mono); font-size: 0.56rem;
+      letter-spacing: 0.08em; padding: 0.2rem 0.65rem;
+      border: 1px solid var(--border); border-radius: 20px;
+      color: var(--ieee-blue); background: var(--ieee-pale); text-transform: uppercase;
+    }
+
+    /* ============================================================
+       9. FILTROS DE VOLUNTARIADO
+    ============================================================ */
     .filter-tabs {
-      display: flex; gap: 0.75rem; flex-wrap: wrap;
-      margin-bottom: 3rem;
+      display: flex; gap: 0.6rem; flex-wrap: wrap;
+      margin-bottom: clamp(1.5rem,4vw,3rem);
     }
     .filter-btn {
       font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      padding: 0.5rem 1.2rem;
-      border: 1px solid rgba(247,183,49,0.25);
-      background: transparent;
-      color: var(--text-muted);
-      border-radius: 2px;
-      cursor: none;
-      transition: all 0.3s ease;
+      font-size: clamp(0.58rem,1.1vw,0.62rem);
+      letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 0.45rem 1rem;
+      border: 1.5px solid var(--border-mid);
+      background: var(--white); color: var(--text-muted);
+      border-radius: 20px; cursor: none;
+      transition: all 0.25s ease;
     }
-    .filter-btn:hover, .filter-btn.active {
-      background: var(--gold);
-      color: var(--navy);
-      border-color: var(--gold);
+    .filter-btn:hover { border-color: var(--ieee-blue); color: var(--ieee-blue); }
+    .filter-btn.active {
+      background: var(--ieee-blue); color: var(--white);
+      border-color: var(--ieee-blue);
+      box-shadow: 0 4px 12px rgba(0,90,156,0.25);
     }
 
-    /* ===========================
-       VOLUNTEERING TIMELINE
-    =========================== */
-    #volunteering { background: transparent; }
+    /* ============================================================
+       10. TIMELINE VOLUNTARIADO
+    ============================================================ */
+    #voluntariado { background: var(--white) !important; }
 
     .timeline {
       position: relative;
-      padding-left: 2rem;
+      padding-left: clamp(1rem, 4vw, 2rem);
     }
     .timeline::before {
-      content: '';
-      position: absolute; left: 0; top: 0; bottom: 0;
-      width: 1px;
-      background: linear-gradient(to bottom, var(--gold), transparent 90%);
-      opacity: 0.3;
+      content: ''; position: absolute;
+      left: 0; top: 0; bottom: 0; width: 2px;
+      background: linear-gradient(to bottom, var(--ieee-blue), var(--border) 90%);
+      border-radius: 2px;
     }
-
     .timeline-item {
       position: relative;
-      padding: 0 0 3.5rem 3rem;
-      opacity: 0;
-      transform: translateX(-20px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
+      padding: 0 0 clamp(1.5rem,4vw,3rem) clamp(1.5rem,4vw,3rem);
+      opacity: 0; transform: translateX(-1.125rem);
+      transition: opacity 0.55s ease, transform 0.55s ease;
     }
     .timeline-item.visible { opacity: 1; transform: translateX(0); }
     .timeline-item.hidden-filter { display: none; }
 
     .timeline-dot {
       position: absolute;
-      left: -0.45rem; top: 0.35rem;
-      width: 10px; height: 10px;
+      left: clamp(-0.55rem,-1.2vw,-0.45rem); top: 0.4rem;
+      width: 0.75rem; height: 0.75rem;
       border-radius: 50%;
-      background: var(--gold);
-      box-shadow: 0 0 12px var(--glow);
+      background: var(--ieee-blue);
+      border: 2px solid var(--white);
+      box-shadow: 0 0 0 2px var(--ieee-blue);
     }
 
     .timeline-card {
-      background: rgba(0, 53, 102, 0.25);
-      border: 1px solid rgba(247,183,49,0.1);
-      border-radius: 4px;
-      padding: 1.8rem 2rem;
-      transition: all 0.35s ease;
-      position: relative;
-      overflow: hidden;
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 0.625rem;
+      padding: var(--card-pad);
+      transition: all 0.3s ease;
+      position: relative; overflow: hidden;
+      box-shadow: var(--shadow-sm);
     }
     .timeline-card::before {
-      content: '';
-      position: absolute; top: 0; left: 0;
-      width: 3px; height: 0;
-      background: var(--gold);
-      transition: height 0.4s ease;
+      content: ''; position: absolute;
+      top: 0; left: 0; width: 4px; height: 0;
+      background: var(--ieee-blue); border-radius: 4px 0 0 4px;
+      transition: height 0.35s ease;
     }
-    .timeline-card:hover {
-      background: rgba(0, 53, 102, 0.5);
-      border-color: rgba(247,183,49,0.3);
-      transform: translateX(6px);
-      box-shadow: 0 8px 40px rgba(0,0,0,0.3);
-    }
+    .timeline-card:hover { border-color: var(--border-mid); box-shadow: var(--shadow-md); transform: translateX(5px); }
     .timeline-card:hover::before { height: 100%; }
+
+    /* Espacio para foto del rol */
+    .role-photo-slot {
+      width: 100%; aspect-ratio: 16/7;
+      border-radius: 0.5rem;
+      background: var(--ieee-pale);
+      border: 2px dashed var(--border-mid);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 1.2rem;
+      overflow: hidden;
+      position: relative;
+    }
+    .role-photo-slot img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; border-radius: 0.5rem;
+    }
+    .role-photo-slot .photo-placeholder-icon { color: var(--ieee-pale2); font-size: clamp(1.5rem,4vw,2.2rem); }
+    .role-photo-slot .photo-placeholder-text {
+      font-family: var(--font-mono); font-size: 0.58rem;
+      color: var(--border-mid); letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
 
     .card-meta {
       display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 0.5rem;
-      margin-bottom: 0.8rem;
+      flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.7rem;
     }
-    .card-period {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      color: var(--gold);
-    }
-    .card-tag {
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.1em;
-      padding: 0.2rem 0.7rem;
-      border: 1px solid rgba(247,183,49,0.2);
-      border-radius: 2px;
-      color: var(--text-muted);
-      text-transform: uppercase;
-    }
-    .card-title {
-      font-family: var(--font-display);
-      font-size: 1.35rem;
-      font-weight: 600;
-      color: var(--white);
-      line-height: 1.3;
-      margin-bottom: 0.4rem;
-    }
-    .card-org {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      color: var(--gold);
-      opacity: 0.75;
-      margin-bottom: 1rem;
-      letter-spacing: 0.05em;
-    }
-    .card-desc {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      line-height: 1.7;
-      margin-bottom: 1rem;
-    }
-    .card-achievements {
-      list-style: none;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.5s ease;
-    }
-    .timeline-card:hover .card-achievements { max-height: 400px; }
+    .card-period { font-family: var(--font-mono); font-size: clamp(0.58rem,1.1vw,0.62rem); letter-spacing: 0.12em; color: var(--ieee-blue); font-weight: 500; }
+    .card-tag { font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.08em; padding: 0.18rem 0.65rem; border: 1px solid var(--border); border-radius: 20px; color: var(--text-muted); background: var(--surface-alt); text-transform: uppercase; }
+    .card-title { font-family: var(--font-display); font-size: clamp(1.05rem,2vw,1.3rem); font-weight: 600; color: var(--ieee-dark); line-height: 1.3; margin-bottom: 0.35rem; }
+    .card-org { font-family: var(--font-mono); font-size: clamp(0.6rem,1.1vw,0.67rem); color: var(--ieee-blue); margin-bottom: 0.9rem; letter-spacing: 0.04em; }
+    .card-desc { font-size: clamp(0.8rem,1.4vw,0.85rem); color: var(--text-muted); line-height: 1.75; margin-bottom: 0.8rem; }
+    .card-achievements { list-style: none; max-height: 0; overflow: hidden; transition: max-height 0.5s ease; }
+    .timeline-card:hover .card-achievements { max-height: 30rem; }
     .card-achievements li {
-      font-size: 0.78rem;
-      color: rgba(245,240,232,0.65);
-      line-height: 1.6;
-      padding: 0.3rem 0;
-      padding-left: 1.2rem;
-      position: relative;
+      font-size: clamp(0.75rem,1.3vw,0.8rem); color: var(--text-mid);
+      line-height: 1.65; padding: 0.28rem 0 0.28rem 1.2rem;
+      position: relative; border-top: 1px solid var(--ieee-pale);
     }
-    .card-achievements li::before {
-      content: '→';
-      position: absolute; left: 0;
-      color: var(--gold);
-      font-size: 0.7rem;
-    }
+    .card-achievements li::before { content: '›'; position: absolute; left: 0; color: var(--ieee-blue); font-size: 1rem; font-weight: 600; line-height: 1.4; }
 
-    /* ===========================
-       AWARDS GRID
-    =========================== */
-    #awards {
-      background: rgba(0,0,0,0.15);
-      border-top: 1px solid rgba(247,183,49,0.08);
-    }
+    /* ============================================================
+       11. RECONOCIMIENTOS
+    ============================================================ */
+    #reconocimientos { background: var(--surface-alt) !important; border-top: 1px solid var(--border); }
 
     .awards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+      gap: var(--gap-grid);
     }
-
     .award-card {
-      background: rgba(0, 31, 63, 0.6);
-      border: 1px solid rgba(247,183,49,0.12);
-      border-radius: 4px;
-      padding: 1.8rem;
-      position: relative;
-      overflow: hidden;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.3s, box-shadow 0.3s;
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 0.625rem; padding: var(--card-pad);
+      position: relative; overflow: hidden;
+      opacity: 0; transform: translateY(1.125rem);
+      transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s, border-color 0.3s;
+      box-shadow: var(--shadow-sm);
+      display: flex; flex-direction: column;
     }
     .award-card.visible { opacity: 1; transform: translateY(0); }
-
+    .award-card:hover { border-color: var(--border-mid); box-shadow: var(--shadow-md); transform: translateY(-5px); }
     .award-card::after {
-      content: '';
-      position: absolute;
-      top: -40%; right: -40%;
-      width: 80%; height: 80%;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(247,183,49,0.05) 0%, transparent 70%);
-      pointer-events: none;
-      transition: opacity 0.4s;
-      opacity: 0;
+      content: ''; position: absolute; top: 0; left: 0; bottom: 0;
+      width: 3px; background: var(--ieee-blue); border-radius: 3px 0 0 3px;
+      transform: scaleY(0); transform-origin: top; transition: transform 0.35s ease;
     }
-    .award-card:hover {
-      border-color: rgba(247,183,49,0.4);
-      box-shadow: 0 12px 50px rgba(0,0,0,0.35), 0 0 30px rgba(247,183,49,0.06);
-      transform: translateY(-5px);
-    }
-    .award-card:hover::after { opacity: 1; }
-
+    .award-card:hover::after { transform: scaleY(1); }
     .award-icon {
-      width: 44px; height: 44px;
-      border-radius: 50%;
-      background: rgba(247,183,49,0.1);
-      border: 1px solid rgba(247,183,49,0.25);
+      width: clamp(2.2rem,4vw,2.75rem); height: clamp(2.2rem,4vw,2.75rem);
+      border-radius: 0.625rem; background: var(--ieee-pale); border: 1px solid var(--border);
       display: flex; align-items: center; justify-content: center;
-      margin-bottom: 1.2rem;
-      font-size: 1rem;
-      color: var(--gold);
+      margin-bottom: 1.1rem; font-size: clamp(0.85rem,1.8vw,1rem);
+      color: var(--ieee-blue); transition: all 0.3s; flex-shrink: 0;
     }
-    .award-year {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      color: var(--gold);
-      margin-bottom: 0.5rem;
-    }
-    .award-title {
-      font-family: var(--font-display);
-      font-size: 1.15rem;
-      font-weight: 600;
-      color: var(--white);
-      line-height: 1.35;
-      margin-bottom: 0.5rem;
-    }
-    .award-issuer {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      color: rgba(247,183,49,0.65);
-      margin-bottom: 0.8rem;
-      letter-spacing: 0.05em;
-    }
-    .award-location {
-      display: flex; align-items: center; gap: 0.4rem;
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      color: var(--text-muted);
-      letter-spacing: 0.05em;
-    }
-    .award-desc {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-      margin-top: 0.8rem;
-      padding-top: 0.8rem;
-      border-top: 1px solid rgba(247,183,49,0.08);
-    }
+    .award-card:hover .award-icon { background: var(--ieee-blue); color: var(--white); border-color: var(--ieee-blue); }
+    .award-year { font-family: var(--font-mono); font-size: clamp(0.58rem,1vw,0.62rem); letter-spacing: 0.15em; color: var(--ieee-blue); margin-bottom: 0.45rem; }
+    .award-title { font-family: var(--font-display); font-size: clamp(1rem,1.8vw,1.1rem); font-weight: 600; color: var(--ieee-dark); line-height: 1.35; margin-bottom: 0.4rem; }
+    .award-issuer { font-family: var(--font-mono); font-size: 0.62rem; color: var(--text-muted); margin-bottom: 0.75rem; letter-spacing: 0.03em; }
+    .award-location { display: flex; align-items: center; gap: 0.4rem; font-family: var(--font-mono); font-size: 0.58rem; color: var(--text-muted); }
+    .award-location i { color: var(--ieee-blue); }
+    .award-desc { font-size: 0.78rem; color: var(--text-muted); line-height: 1.65; margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid var(--border); flex: 1; }
+    .award-card.award-highlight { border-color: var(--ieee-blue); background: var(--ieee-pale); }
+    .award-card.award-highlight .award-icon { background: var(--ieee-blue); color: var(--white); border-color: var(--ieee-dark); }
 
-    /* ===========================
-       FOOTER
-    =========================== */
+    /* ============================================================
+       12. SOBRE MÍ (INICIO)
+    ============================================================ */
+    #inicio { background: var(--white) !important; }
+    .inicio-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: clamp(2rem, 5vw, 4rem);
+      align-items: start;
+    }
+    .inicio-bio { font-size: clamp(0.85rem,1.5vw,0.92rem); color: var(--text-mid); line-height: 1.9; }
+    .inicio-bio p + p { margin-top: 1.1rem; }
+    .inicio-bio strong { color: var(--ieee-dark); font-weight: 600; }
+    .inicio-bio em { color: var(--ieee-blue); font-style: italic; }
+    .inicio-highlights { display: flex; flex-direction: column; gap: clamp(0.6rem,1.5vw,0.9rem); }
+    .highlight-item {
+      display: flex; gap: clamp(0.6rem,1.5vw,1rem); align-items: flex-start;
+      padding: clamp(0.75rem,1.5vw,1rem) clamp(0.85rem,2vw,1.2rem);
+      background: var(--off-white); border: 1px solid var(--border);
+      border-radius: 0.5rem; transition: all 0.25s;
+    }
+    .highlight-item:hover { background: var(--ieee-pale); border-color: var(--border-mid); transform: translateX(4px); }
+    .highlight-item-icon {
+      width: clamp(2rem,3.5vw,2.125rem); height: clamp(2rem,3.5vw,2.125rem); flex-shrink: 0;
+      border-radius: 0.5rem; background: var(--ieee-pale2); border: 1px solid var(--border-mid);
+      display: flex; align-items: center; justify-content: center;
+      font-size: clamp(0.7rem,1.3vw,0.82rem); color: var(--ieee-blue);
+    }
+    .highlight-item-text strong { font-size: clamp(0.75rem,1.3vw,0.82rem); font-weight: 600; color: var(--ieee-dark); display: block; margin-bottom: 0.15rem; }
+    .highlight-item-text span { font-family: var(--font-mono); font-size: clamp(0.56rem,1vw,0.62rem); color: var(--text-muted); }
+
+    /* ============================================================
+       13. COMPROMISOS (RESUMEN EJECUTIVO)
+    ============================================================ */
+    #compromisos {
+      background: var(--ieee-dark) !important;
+    }
+    #compromisos .section-title { color: var(--white); }
+    #compromisos .section-title em { color: rgba(255,255,255,0.7); }
+    #compromisos .section-label { color: rgba(255,255,255,0.5); }
+    #compromisos .section-line { background: linear-gradient(to right, rgba(255,255,255,0.25), transparent); }
+    .compromisos-tagline {
+      text-align: center; font-family: var(--font-display);
+      font-size: clamp(1.2rem, 2.8vw, 2rem);
+      font-weight: 400; color: var(--white);
+      margin-bottom: 0.6rem; font-style: italic;
+    }
+    .compromisos-tagline em { color: rgba(255,255,255,0.65); font-style: normal; font-weight: 300; }
+    .compromisos-sub {
+      text-align: center; font-family: var(--font-mono);
+      font-size: 0.62rem; letter-spacing: 0.2em;
+      color: rgba(255,255,255,0.45); text-transform: uppercase;
+      margin-bottom: clamp(1.5rem,4vw,3rem);
+    }
+    #compromisos .propuesta-card { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.12); }
+    #compromisos .propuesta-card:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.25); }
+    #compromisos .propuesta-icon { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); color: rgba(255,255,255,0.8); }
+    #compromisos .propuesta-card:hover .propuesta-icon { background: rgba(255,255,255,0.2); color: var(--white); }
+    #compromisos .propuesta-num { color: rgba(255,255,255,0.45); }
+    #compromisos .propuesta-title { color: var(--white); }
+    #compromisos .propuesta-desc { color: rgba(255,255,255,0.55); }
+    #compromisos .propuesta-card::before { background: linear-gradient(90deg, rgba(255,255,255,0.5), rgba(255,255,255,0.2)); }
+
+    /* ============================================================
+       14. FOOTER
+    ============================================================ */
     footer {
       position: relative; z-index: 1;
-      padding: 3rem 4rem;
-      border-top: 1px solid rgba(247,183,49,0.1);
+      padding: clamp(1.5rem,3vw,2.5rem) var(--section-pad-h);
+      background: var(--ieee-dark);
+      border-top: 1px solid rgba(255,255,255,0.1);
       display: flex; align-items: center; justify-content: space-between;
       flex-wrap: wrap; gap: 1rem;
     }
-    .footer-left {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      color: var(--text-muted);
-    }
-    .footer-left strong { color: var(--gold); }
-    .footer-ieee {
-      display: flex; align-items: center; gap: 0.8rem;
-    }
-    .ieee-badge {
-      font-family: var(--font-display);
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--gold);
-      letter-spacing: 0.05em;
-    }
-    .footer-right {
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      color: var(--text-muted);
-      letter-spacing: 0.1em;
-    }
+    .footer-left { font-family: var(--font-mono); font-size: clamp(0.56rem,1vw,0.62rem); letter-spacing: 0.12em; color: rgba(255,255,255,0.45); }
+    .footer-left strong { color: rgba(255,255,255,0.85); }
+    .footer-ieee { display: flex; align-items: center; gap: 0.8rem; }
+    .ieee-badge { font-family: var(--font-display); font-size: clamp(1rem,2vw,1.3rem); font-weight: 700; color: var(--white); letter-spacing: 0.06em; }
+    .footer-right { font-family: var(--font-mono); font-size: 0.58rem; color: rgba(255,255,255,0.35); letter-spacing: 0.1em; }
 
-    /* ===========================
-       ANIMATIONS
-    =========================== */
+    /* ============================================================
+       15. ANIMACIONES
+    ============================================================ */
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; transform: translateY(1.375rem); }
+      to   { opacity: 1; transform: translateY(0); }
     }
-    @keyframes fadeIn {
-      from { opacity: 0; } to { opacity: 1; }
-    }
+    @keyframes fadeIn  { from { opacity: 0; } to { opacity: 1; } }
     @keyframes scrollPulse {
-      0%, 100% { opacity: 0.4; transform: scaleY(1); }
-      50% { opacity: 1; transform: scaleY(1.2); }
+      0%,100% { opacity: 0.3; transform: scaleY(1); }
+      50%      { opacity: 0.8; transform: scaleY(1.15); }
     }
-    @keyframes countUp { from { opacity: 0; } to { opacity: 1; } }
 
-    /* ===========================
-       RESPONSIVE
-    =========================== */
-    @media (max-width: 768px) {
-      nav { padding: 1rem 1.5rem; }
-      nav.scrolled { padding: 0.7rem 1.5rem; }
-      .nav-links { display: none; }
-      section { padding: 5rem 1.5rem; }
-      footer { padding: 2rem 1.5rem; flex-direction: column; }
-      .hero-stats { gap: 1.5rem; }
-      .stat-num { font-size: 2rem; }
-      .section-header { flex-wrap: wrap; }
-      .timeline { padding-left: 1rem; }
-      .timeline-item { padding-left: 1.8rem; }
+    /* ============================================================
+       16. MEDIA QUERIES
+       — 480px  (móvil pequeño)
+       — 768px  (tablet / móvil grande)
+       — 1024px (desktop estándar)
+       — 1280px (desktop ancho)
+    ============================================================ */
+
+    /* ── 480px: móvil pequeño ── */
+    @media (max-width: 480px) {
       body { cursor: auto; }
       .cursor, .cursor-ring { display: none; }
+
+      nav { padding: 0.75rem 1rem; }
+      nav.scrolled { padding: 0.6rem 1rem; }
+      .nav-links { display: none; flex-direction: column; gap: 1rem; }
+      .nav-links.open {
+        display: flex; position: absolute;
+        top: 100%; left: 0; right: 0;
+        background: rgba(255,255,255,0.97);
+        border-bottom: 1px solid var(--border);
+        padding: 1.2rem 1.5rem;
+        box-shadow: var(--shadow-md);
+      }
+      .nav-toggle { display: flex; }
+
+      #hero { padding: 5.5rem 1rem 3rem; }
+
+      .hero-badge::before, .hero-badge::after { width: 0.8rem; }
+      .hero-stats { flex-direction: column; }
+      .stat-divider { width: auto; height: 1px; align-self: auto; }
+      .stat-item { padding: 0.8rem 1.5rem; flex: 1 1 100%; }
+
+      .inicio-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .section-header { gap: 0.5rem; }
+      .propuestas-grid,
+      .awards-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; text-align: center; gap: 0.75rem; }
+    }
+
+    /* ── 768px: tablet ── */
+    @media (min-width: 481px) and (max-width: 768px) {
+      body { cursor: auto; }
+      .cursor, .cursor-ring { display: none; }
+
+      nav { padding: 0.9rem 1.5rem; }
+      nav.scrolled { padding: 0.7rem 1.5rem; }
+      .nav-links { display: none; flex-direction: column; gap: 1rem; }
+      .nav-links.open {
+        display: flex; position: absolute;
+        top: 100%; left: 0; right: 0;
+        background: rgba(255,255,255,0.97);
+        border-bottom: 1px solid var(--border);
+        padding: 1.2rem 2rem;
+        box-shadow: var(--shadow-md);
+      }
+      .nav-toggle { display: flex; }
+
+      #hero { padding: 6rem 1.5rem 3.5rem; }
+      .hero-stats { flex-wrap: wrap; }
+      .stat-divider { display: none; }
+      .stat-item { flex: 1 1 45%; padding: 0.9rem 1.2rem; }
+
+      .inicio-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .propuestas-grid { grid-template-columns: repeat(2, 1fr); }
+      .awards-grid { grid-template-columns: repeat(2, 1fr); }
+      footer { flex-direction: column; text-align: center; }
+    }
+
+    /* ── 1024px+: desktop estándar ── */
+    @media (min-width: 769px) {
+      .nav-toggle { display: none; }
+      .nav-links { display: flex !important; flex-direction: row; position: static; background: none; border: none; padding: 0; box-shadow: none; }
+      .inicio-grid { grid-template-columns: 1.2fr 1fr; }
+    }
+
+    /* ── 1280px+: desktop ancho ── */
+    @media (min-width: 1280px) {
+      .propuestas-grid { grid-template-columns: repeat(4, 1fr); }
+      .awards-grid     { grid-template-columns: repeat(3, 1fr); }
     }
   </style>
 </head>
 <body>
 
-<!-- Custom cursor -->
+<!-- Cursor -->
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
-
-<!-- Animated background canvas -->
 <canvas id="canvas-bg"></canvas>
 
-<!-- Navigation -->
-<nav id="navbar" aria-label="Main navigation">
-  <div class="nav-logo">IEEE // Profile</div>
-  <ul class="nav-links">
-    <li><a href="#hero">Home</a></li>
-    <li><a href="#volunteering">Volunteering</a></li>
-    <li><a href="#awards">Awards</a></li>
+<!-- ============================================================
+     NAVEGACIÓN
+============================================================ -->
+<nav id="navbar" aria-label="Navegación principal">
+  <div class="nav-logo">IEEE // Colombia 2027–2028</div>
+  <button class="nav-toggle" id="navToggle" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#hero">Inicio</a></li>
+    <li><a href="#propuestas">Propuestas</a></li>
+    <li><a href="#voluntariado">Voluntariado</a></li>
+    <li><a href="#reconocimientos">Reconocimientos</a></li>
   </ul>
 </nav>
 
-<!-- HERO -->
-<section id="hero" aria-label="Profile introduction">
-  <div class="hero-badge">IEEE Region 9 — Latin America &amp; Caribbean</div>
-  <h1 class="hero-name">IEEE <em>Professional</em></h1>
-  <p class="hero-tagline">Student Activities Chair · Community Builder · Innovation Leader</p>
+<!-- ============================================================
+     HERO
+============================================================ -->
+<section id="hero" aria-label="Perfil institucional">
+  <!-- Foto circular: reemplaza el <i> por <img src="tu-foto.jpg" alt="..."> -->
+  <div class="profile-photo-wrapper">
+    <div class="profile-photo-circle">
+      <i class="fas fa-user profile-photo-placeholder"></i>
+    </div>
+  </div>
+
+  <div class="hero-badge">IEEE Región 9 — América Latina y el Caribe</div>
+
+  <h1 class="hero-name">Yesica <em>Alejandra</em><br>Giraldo Tique</h1>
+
+  <p class="hero-candidacy">
+    Candidata a <span>Presidente IEEE Colombia</span> 2027–2028
+  </p>
+
+  <div class="hero-roles">
+    <span class="hero-role-item"><i class="fas fa-circle"></i>Social Media Coordinator — IEEE Entrepreneurship</span>
+    <span class="hero-role-item"><i class="fas fa-circle"></i>MGA SAC Corresponding Member · IEEE Educational Activities &amp; Student Activities</span>
+    <span class="hero-role-item"><i class="fas fa-circle"></i>Miembro IEEE desde 2016 · <span id="yearsLabel"></span> años de membresía</span>
+  </div>
+
+  <div class="hero-socials">
+    <a href="#" class="social-btn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+    <a href="#" class="social-btn" aria-label="Twitter / X"><i class="fab fa-x-twitter"></i></a>
+    <a href="#" class="social-btn" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+    <a href="#" class="social-btn" aria-label="GitHub"><i class="fab fa-github"></i></a>
+    <a href="#" class="social-btn" aria-label="Email"><i class="fas fa-envelope"></i></a>
+  </div>
+
+  <div class="ieee-societies">
+    <span class="society-badge"><i class="fas fa-robot"></i>IEEE RAS</span>
+    <span class="society-badge"><i class="fas fa-venus"></i>IEEE WIE</span>
+    <span class="society-badge"><i class="fas fa-graduation-cap"></i>IEEE Educational Activities</span>
+    <span class="society-badge"><i class="fas fa-users"></i>IEEE Student Activities</span>
+    <span class="society-badge"><i class="fas fa-lightbulb"></i>IEEE Entrepreneurship</span>
+    <span class="society-badge"><i class="fas fa-globe"></i>IEEE MGA</span>
+  </div>
+
   <div class="hero-stats">
     <div class="stat-item">
-      <div class="stat-num" data-count="9">0</div>
-      <div class="stat-label">Volunteer Roles</div>
+      <div class="stat-num" data-count="11">0</div>
+      <div class="stat-label">Roles Voluntarios</div>
     </div>
     <div class="stat-divider"></div>
     <div class="stat-item">
       <div class="stat-num" data-count="13">0</div>
-      <div class="stat-label">Awards &amp; Honors</div>
+      <div class="stat-label">Reconocimientos</div>
     </div>
     <div class="stat-divider"></div>
     <div class="stat-item">
-      <div class="stat-num" data-count="8">0</div>
-      <div class="stat-label">Years of Service</div>
+      <div class="stat-num" id="yearsCount">0</div>
+      <div class="stat-label">Años IEEE</div>
     </div>
     <div class="stat-divider"></div>
     <div class="stat-item">
       <div class="stat-num" data-count="13000">0</div>
-      <div class="stat-label">Members Supported</div>
+      <div class="stat-label">Miembros Apoyados</div>
     </div>
   </div>
+
   <div class="scroll-hint">
-    <span>Scroll</span>
+    <span>Explorar</span>
     <div class="scroll-line"></div>
   </div>
 </section>
 
-<!-- VOLUNTEERING -->
-<section id="volunteering" aria-label="Volunteering experience">
-  <div class="section-header">
-    <span class="section-label">01</span>
-    <h2 class="section-title">Volunteer <em>Experience</em></h2>
-    <div class="section-line"></div>
+<!-- ============================================================
+     PROPUESTAS — BLOQUE 1
+============================================================ -->
+<section id="propuestas" aria-label="Propuestas estratégicas">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Plan</span>
+      <h2 class="section-title">Propuestas <em>Estratégicas</em></h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="propuestas-intro">
+      <p>Mi candidatura se fundamenta en cuatro pilares que transformarán la presencia y el impacto de IEEE Colombia, fortaleciendo a nuestra comunidad de ingenieros, estudiantes y líderes tecnológicos en el país.</p>
+    </div>
+    <div class="propuestas-grid">
+      <div class="propuesta-card">
+        <div class="propuesta-icon"><i class="fas fa-sitemap"></i></div>
+        <div class="propuesta-num">Propuesta 01</div>
+        <h3 class="propuesta-title">Fortalecimiento de Ramas Estudiantiles</h3>
+        <p class="propuesta-desc">Crear programas de mentoría continua, recursos digitales y capacitaciones para activar y sostener ramas estudiantiles en universidades de todo el país, con especial atención a regiones con menor presencia.</p>
+        <div class="propuesta-tags">
+          <span class="propuesta-tag">Educación</span>
+          <span class="propuesta-tag">Estudiantes</span>
+          <span class="propuesta-tag">Regiones</span>
+        </div>
+      </div>
+      <div class="propuesta-card">
+        <div class="propuesta-icon"><i class="fas fa-globe-americas"></i></div>
+        <div class="propuesta-num">Propuesta 02</div>
+        <h3 class="propuesta-title">Internacionalización y Alianzas Estratégicas</h3>
+        <p class="propuesta-desc">Consolidar alianzas con secciones IEEE de la Región 9, universidades internacionales y organismos del sector tecnológico para ampliar oportunidades de intercambio e investigación colaborativa.</p>
+        <div class="propuesta-tags">
+          <span class="propuesta-tag">Internacional</span>
+          <span class="propuesta-tag">Alianzas</span>
+          <span class="propuesta-tag">Región 9</span>
+        </div>
+      </div>
+      <div class="propuesta-card">
+        <div class="propuesta-icon"><i class="fas fa-wifi"></i></div>
+        <div class="propuesta-num">Propuesta 03</div>
+        <h3 class="propuesta-title">Transformación Digital y Comunicación</h3>
+        <p class="propuesta-desc">Modernizar los canales de comunicación institucional, implementar plataformas digitales de gestión y fortalecer la presencia en redes sociales de IEEE Colombia.</p>
+        <div class="propuesta-tags">
+          <span class="propuesta-tag">Digital</span>
+          <span class="propuesta-tag">Comunicación</span>
+          <span class="propuesta-tag">Innovación</span>
+        </div>
+      </div>
+      <div class="propuesta-card">
+        <div class="propuesta-icon"><i class="fas fa-seedling"></i></div>
+        <div class="propuesta-num">Propuesta 04</div>
+        <h3 class="propuesta-title">Desarrollo de Liderazgo Voluntario</h3>
+        <p class="propuesta-desc">Diseñar un programa estructurado de formación de líderes voluntarios con talleres, reconocimientos y acompañamiento para garantizar la continuidad de IEEE Colombia.</p>
+        <div class="propuesta-tags">
+          <span class="propuesta-tag">Liderazgo</span>
+          <span class="propuesta-tag">Voluntariado</span>
+          <span class="propuesta-tag">Sostenibilidad</span>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="filter-tabs" role="tablist" aria-label="Filter by category">
-    <button class="filter-btn active" data-filter="all">All Roles</button>
-    <button class="filter-btn" data-filter="regional">Regional</button>
-    <button class="filter-btn" data-filter="section">Section</button>
-    <button class="filter-btn" data-filter="student">Student Branch</button>
-    <button class="filter-btn" data-filter="wie">WIE</button>
-  </div>
-
-  <div class="timeline" id="timeline">
-
-    <!-- Role 1 -->
-    <div class="timeline-item" data-category="regional">
-      <div class="timeline-dot"></div>
-      <div class="timeline-card">
-        <div class="card-meta">
-          <span class="card-period">Jan 2024 – Dec 2025</span>
-          <span class="card-tag">Regional</span>
-        </div>
-        <h3 class="card-title">IEEE Student Activities Committee Chair</h3>
-        <p class="card-org">IEEE Region 9 — Latin America &amp; Caribbean</p>
-        <p class="card-desc">Support and coordinate the activities of 13,000 undergraduate and graduate student members across Latin America and the Caribbean. Coordinate the annual SBRM event and support the creation and reactivation of Student Organizational Units.</p>
-        <ul class="card-achievements">
-          <li>Established connections with 15 IEEE Societies and secured sponsorships totaling ~USD 120,000 for two SBRM editions.</li>
-          <li>Reviewed and approved ~200 funding and activity requests over two years.</li>
-          <li>Led the reactivation of the Regional Student Magazine – <em>Enlaces</em>.</li>
-          <li>Created the SPARK Program (in-person training for SSACs, SSRs &amp; Counselors) — 2 editions, reaching 30 of 36 Sections.</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Role 2 -->
-    <div class="timeline-item" data-category="wie section">
-      <div class="timeline-dot"></div>
-      <div class="timeline-card">
-        <div class="card-meta">
-          <span class="card-period">Jan 2022 – Feb 2026</span>
-          <span class="card-tag">WIE · Section</span>
-        </div>
-        <h3 class="card-title">Vice Chair – Affinity Group (WIE)</h3>
-        <p class="card-org">IEEE Colombian Section</p>
-        <p class="card-desc">Promote the role of women in engineering within the IEEE Colombia Section through events, activities, contests, and technical visits.</p>
-        <ul class="card-achievements">
-          <li>Organized the first STEM WIE Colombia Camp 2024.</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Role 3 -->
-    <div class="timeline-item" data-category="section">
-      <div class="timeline-dot"></div>
-      <div class="timeline-card">
-        <div class="card-meta">
-          <span class="card-period">Jan 2024 – Dec 2025</span>
-          <span class="card-tag">Section · Chapter</span>
-        </div>
-        <h3 class="card-title">Vice Chair – Robotics &amp; Automation Society (RAS)</h3>
-        <p class="card-org">IEEE Colombian Chapter (RAS)</p>
-        <p class="card-desc">Support organization and coordination of robotics competitions, ROS Meetups, and national robotics projects. Foster collaboration among professionals, researchers, and students to strengthen the robotics and automation community in Colombia.</p>
-        <ul class="card-achievements">
-          <li>Promoted IEEE RAS initiatives through technical events and hands-on activities.</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Role 4 -->
-    <div class="timeline-item" data-category="section">
-      <div class="timeline-dot"></div>
-      <div class="timeline-card">
-        <div class="card-meta">
-          <span class="card-period">Jan 2023 – Jan 2025</span>
-          <span class="card-tag">Section</span>
-        </div>
-        <h3 class="card-title">Electronics Communications Coordinator</h3>
-        <p class="card-org">IEEE Colombian Section</p>
-        <p class="card-desc">Coordinate electronic communication activities within the IEEE Colombia Section, ensuring accurate information delivery to all section members.</p>
-        <ul class="card-achievements"></ul>
-      </div>
-    </div>
-
-    <!-- Role 5 -->
-    <div class="timeline-item" data-category="regional">
-      <div class="timeline-dot"></div>
-      <div class="timeline-card">
-        <div class="card-meta">
-          <span class="card-period">Jan 2024 – Dec 2025</span>
-          <span class="card-tag">MGA · Global</span>
-        </div>
-        <h3 class="card-title">Student Activities – MGA Global Student Activities Committee</h3>
-        <p class="card-org">IEEE MGA</p>
-        <p class="card-desc">Assist in planning and execution of student activities and events, collaborating with stakeholders worldwide.</p>
-        <ul class="card-achievements">
-          <li>Participated in the Face-to-Face Meeting in Lisbon, Portugal (March 2024).</li>
-          <li>Actively contributed ideas to improve the IEEE member experience at the global level.</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Role 6 -->
-    <div class="timeline-item" data-category="section">
-      <div class="timeline-dot"></div>
-      <div class="timeline-card">
-        <div class="card-meta">
-          <span class="card-period">Apr 2022 – Dec 2023</span>
-          <span class="card-tag">Section · Student</span>
-        </div>
-        <h3 class="card-title">Section Student Activities Coordinator</h3>
-        <p class="card-org">IEEE Colombian Section</p>
-        <p class="card-desc">Coordinate student activities for more than 50 branches and 800 student members, ensuring active participation in local and regional events.</p>
-        <ul class="card-achievements">
-          <li>Facilitated the creation and reactivation of Student Branches in universities across the region.</li>
-          <li>Supervised academic events, competitions, and extracurricular activities related to engineering and technology.</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Role 7 -->
-    <div class="timeline-item" data-category="student">
-      <div class="timeline-dot"></div>
-      <div class="timeline-card">
-        <div class="card-meta">
-          <span class="card-period">Apr 2019 – Jul 2020</span>
-          <span class="card-tag">Student Branch</span>
-        </div>
-        <h3 class="card-title">Student Branch Chair</h3>
-        <p class="card-org">Instituto Tecnológico Superior de Calkiní — IEEE Mexico Section</p>
-        <p class="card-desc">Lead and coordinate the activities of the IEEE Student Branch at ITESCAM during an academic exchange, managing membership and student engagement.</p>
-        <ul class="card-achievements">
-          <li>Participated in the creation of the IEEE Student Branch at ITESCAM.</li>
-          <li>Represented the Branch in meetings with other branches and organizations within IEEE.</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Role 8 -->
-    <div class="timeline-item" data-category="student">
-      <div class="timeline-dot"></div>
-      <div class="timeline-card">
-        <div class="card-meta">
-          <span class="card-period">Jun 2017 – Mar 2018</span>
-          <span class="card-tag">Student Branch</span>
-        </div>
-        <h3 class="card-title">Vice Chair – Student Branch</h3>
-        <p class="card-org">ETITC — IEEE Colombian Section</p>
-        <p class="card-desc">Manage interaction between student branches and various IEEE organizational units to ensure the integration of efforts and resources.</p>
-        <ul class="card-achievements"></ul>
-      </div>
-    </div>
-
-    <!-- Role 9 -->
-    <div class="timeline-item" data-category="wie student">
-      <div class="timeline-dot"></div>
-      <div class="timeline-card">
-        <div class="card-meta">
-          <span class="card-period">Nov 2016 – Mar 2018</span>
-          <span class="card-tag">WIE · Student</span>
-        </div>
-        <h3 class="card-title">Affinity Group Chair – WIE</h3>
-        <p class="card-org">IEEE ETITC Student Branch — IEEE Colombian Section</p>
-        <p class="card-desc">Coordinate the WIE affinity group, promoting inclusion of women in engineering through professional development opportunities, events, workshops, and conferences inspiring young women in STEM.</p>
-        <ul class="card-achievements">
-          <li>Collaborated with other organizations and affinity groups to promote diversity and gender equity within IEEE.</li>
-        </ul>
-      </div>
-    </div>
-
-  </div><!-- end timeline -->
 </section>
 
-<!-- AWARDS -->
-<section id="awards" aria-label="Awards and recognition">
-  <div class="section-header">
-    <span class="section-label">02</span>
-    <h2 class="section-title">Awards &amp; <em>Recognition</em></h2>
-    <div class="section-line"></div>
+<!-- ============================================================
+     SOBRE MÍ
+============================================================ -->
+<section id="inicio" aria-label="Sobre Yesica Giraldo">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Perfil</span>
+      <h2 class="section-title">Sobre <em>Mí</em></h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="inicio-grid">
+      <div class="inicio-bio">
+        <p>Soy Yesica Alejandra Giraldo Tique, ingeniera electrónica, líder técnica y voluntaria IEEE comprometida con el avance de la tecnología para el beneficio de la humanidad. <strong>Mi membresía en IEEE inició en 2016</strong>, y desde entonces he contribuido activamente al fortalecimiento de la comunidad IEEE en Colombia, América Latina y a nivel global.</p>
+        <p>A lo largo de mi trayectoria he liderado iniciativas estudiantiles, coordinado actividades regionales para más de <em>13.000 miembros</em>, impulsado programas de inclusión para mujeres en ingeniería y representado a Colombia en escenarios internacionales como Portugal, Brasil y Ecuador.</p>
+        <p>Como <strong>candidata a la Presidencia de IEEE Colombia 2027–2028</strong>, propongo una visión de transformación sustentada en el fortalecimiento territorial, la internacionalización y el desarrollo del capital humano voluntario que es el corazón de nuestra organización.</p>
+      </div>
+      <div class="inicio-highlights">
+        <div class="highlight-item">
+          <div class="highlight-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="highlight-item-text">
+            <strong>Bogotá, Colombia</strong>
+            <span>IEEE Colombia Section · Región 9</span>
+          </div>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-item-icon"><i class="fas fa-calendar-alt"></i></div>
+          <div class="highlight-item-text">
+            <strong>Miembro IEEE desde 2016</strong>
+            <span id="membershipDetail">+9 años de membresía activa</span>
+          </div>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-item-icon"><i class="fas fa-robot"></i></div>
+          <div class="highlight-item-text">
+            <strong>Vicepresidenta RAS Colombia</strong>
+            <span>IEEE Robotics &amp; Automation Society · 2024–2025</span>
+          </div>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-item-icon"><i class="fas fa-users"></i></div>
+          <div class="highlight-item-text">
+            <strong>SAC Chair · Región 9</strong>
+            <span>Student Activities Committee · 13,000 miembros</span>
+          </div>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-item-icon"><i class="fas fa-globe"></i></div>
+          <div class="highlight-item-text">
+            <strong>Presencia Internacional</strong>
+            <span>Colombia · México · Ecuador · Portugal · Brasil · Rumania</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+</section>
 
-  <div class="awards-grid" id="awardsGrid">
-
-    <div class="award-card">
-      <div class="award-icon"><i class="fas fa-trophy"></i></div>
-      <div class="award-year">March 2025 · Brasília, Brazil</div>
-      <h3 class="award-title">IEEE R9 Discretionary Award</h3>
-      <p class="award-issuer">IEEE Latin America Region 9</p>
-      <div class="award-location"><i class="fas fa-map-marker-alt" style="color:var(--gold);font-size:0.55rem"></i> Brasília, Brazil</div>
-      <p class="award-desc">Presented in recognition of outstanding leadership, dedication, and contributions to the advancement of student and professional activities across Latin America and the Caribbean.</p>
+<!-- ============================================================
+     VOLUNTARIADO — 11 ROLES
+============================================================ -->
+<section id="voluntariado" aria-label="Experiencia en voluntariado IEEE">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">01</span>
+      <h2 class="section-title">Voluntariado <em>IEEE</em></h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="filter-tabs" role="tablist">
+      <button class="filter-btn active" data-filter="all">Todos</button>
+      <button class="filter-btn" data-filter="global">Global</button>
+      <button class="filter-btn" data-filter="regional">Regional</button>
+      <button class="filter-btn" data-filter="section">Sección</button>
+      <button class="filter-btn" data-filter="student">Rama Estudiantil</button>
+      <button class="filter-btn" data-filter="wie">WIE</button>
+      <button class="filter-btn" data-filter="entrepreneurship">Entrepreneurship</button>
     </div>
 
-    <div class="award-card">
-      <div class="award-icon"><i class="fas fa-medal"></i></div>
-      <div class="award-year">November 2024 · Bogotá, Colombia</div>
-      <h3 class="award-title">Recognition for Dedication and Support</h3>
-      <p class="award-issuer">IEEE Colombia Section – Student Activities Committee</p>
-      <div class="award-location"><i class="fas fa-map-marker-alt" style="color:var(--gold);font-size:0.55rem"></i> Bogotá, Colombia</div>
-      <p class="award-desc">Awarded in appreciation of years of dedication, leadership, and continuous support to student activities within the Section.</p>
-    </div>
+    <div class="timeline" id="timeline">
 
-    <div class="award-card">
-      <div class="award-icon"><i class="fas fa-users"></i></div>
-      <div class="award-year">November 2022 · Bogotá, Colombia</div>
-      <h3 class="award-title">Social Leadership — Community Contribution</h3>
-      <p class="award-issuer">ETITC</p>
-      <div class="award-location"><i class="fas fa-map-marker-alt" style="color:var(--gold);font-size:0.55rem"></i> Bogotá, Colombia</div>
-      <p class="award-desc">Recognizes leadership and contribution to social projects within the engineering and technology community, particularly activities that promote social commitment, inclusion, and collaboration.</p>
-    </div>
+      <!-- ROL 1 — MGA SAC Global (NUEVO) -->
+      <div class="timeline-item" data-category="global mga">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <!-- Espacio para foto del rol -->
+          <div class="role-photo-slot">
+            <!-- Reemplazar por: <img src="foto-mga-sac.jpg" alt="MGA SAC Global"> -->
+            <i class="fas fa-image photo-placeholder-icon"></i>
+            <span class="photo-placeholder-text">Agregar foto del rol</span>
+          </div>
+          <div class="card-meta">
+            <span class="card-period">2024 – Presente</span>
+            <span class="card-tag">Global · MGA</span>
+          </div>
+          <h3 class="card-title">MGA SAC Corresponding Member</h3>
+          <p class="card-org">IEEE MGA — Member and Geographic Activities</p>
+          <p class="card-desc">Miembro correspondiente del Comité Global de Actividades Estudiantiles de IEEE MGA, apoyando iniciativas de IEEE Educational Activities y Student Activities a nivel mundial. Colaboración en estrategias para mejorar la experiencia del miembro estudiantil globalmente.</p>
+          <ul class="card-achievements">
+            <li>Apoyo en iniciativas de IEEE Educational Activities y Student Activities a escala global.</li>
+            <li>Participación en reuniones del SAC Global con representantes de todas las regiones IEEE.</li>
+            <li>Contribución al desarrollo de políticas y programas para miembros estudiantiles.</li>
+          </ul>
+        </div>
+      </div>
 
-    <div class="award-card">
-      <div class="award-icon"><i class="fas fa-graduation-cap"></i></div>
-      <div class="award-year">November 2022 · Virtual</div>
-      <h3 class="award-title">IEEE VOLT Graduate</h3>
-      <p class="award-issuer">IEEE MGA</p>
-      <div class="award-location"><i class="fas fa-globe" style="color:var(--gold);font-size:0.55rem"></i> Virtual</div>
-    </div>
+      <!-- ROL 2 — IEEE Entrepreneurship (NUEVO) -->
+      <div class="timeline-item" data-category="global entrepreneurship">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="role-photo-slot">
+            <!-- Reemplazar por: <img src="foto-entrepreneurship.jpg" alt="IEEE Entrepreneurship"> -->
+            <i class="fas fa-image photo-placeholder-icon"></i>
+            <span class="photo-placeholder-text">Agregar foto del rol</span>
+          </div>
+          <div class="card-meta">
+            <span class="card-period">2024 – Presente</span>
+            <span class="card-tag">Global · Entrepreneurship</span>
+          </div>
+          <h3 class="card-title">Social Media Coordinator</h3>
+          <p class="card-org">IEEE Entrepreneurship</p>
+          <p class="card-desc">Coordinación de la estrategia de comunicación y redes sociales de IEEE Entrepreneurship a nivel global, promoviendo el ecosistema emprendedor en la comunidad IEEE y visibilizando iniciativas, eventos y recursos para ingenieros emprendedores.</p>
+          <ul class="card-achievements">
+            <li>Diseño e implementación de la estrategia de contenido en redes sociales de IEEE Entrepreneurship.</li>
+            <li>Amplificación de iniciativas globales de emprendimiento tecnológico en la comunidad IEEE.</li>
+            <li>Coordinación con equipos internacionales para comunicación unificada y efectiva.</li>
+          </ul>
+        </div>
+      </div>
 
-    <div class="award-card">
-      <div class="award-icon"><i class="fas fa-star"></i></div>
-      <div class="award-year">December 2021 · Bogotá, Colombia</div>
-      <h3 class="award-title">AESS Colombia Best Volunteer 2021</h3>
-      <p class="award-issuer">IEEE Aerospace and Electronic Systems Society (AESS) – Colombia Section</p>
-      <div class="award-location"><i class="fas fa-map-marker-alt" style="color:var(--gold);font-size:0.55rem"></i> Bogotá, Colombia</div>
-      <p class="award-desc">Highlights dedication and contributions as a volunteer in society activities, supporting events and programs related to aerospace and electronic engineering.</p>
-    </div>
+      <!-- ROL 3 — SAC Chair Región 9 -->
+      <div class="timeline-item" data-category="regional">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="role-photo-slot">
+            <i class="fas fa-image photo-placeholder-icon"></i>
+            <span class="photo-placeholder-text">Agregar foto del rol</span>
+          </div>
+          <div class="card-meta">
+            <span class="card-period">Ene 2024 – Dic 2025</span>
+            <span class="card-tag">Regional</span>
+          </div>
+          <h3 class="card-title">Presidenta del Comité de Actividades Estudiantiles (SAC)</h3>
+          <p class="card-org">IEEE Región 9 — América Latina y el Caribe</p>
+          <p class="card-desc">Apoyo y coordinación de actividades para más de 13.000 miembros estudiantes en América Latina y el Caribe. Coordinación del evento anual SBRM y respaldo a la creación y reactivación de unidades organizacionales estudiantiles.</p>
+          <ul class="card-achievements">
+            <li>Establecí conexiones con 15 Sociedades IEEE y aseguré patrocinios por ~USD 120,000 para dos ediciones del SBRM.</li>
+            <li>Revisé y aprobé ~200 solicitudes de financiamiento durante dos años.</li>
+            <li>Lideré la reactivación de la Revista Estudiantil Regional — <em>Enlaces</em>.</li>
+            <li>Creé el Programa SPARK — 2 ediciones, alcanzando 30 de 36 secciones.</li>
+          </ul>
+        </div>
+      </div>
 
-    <div class="award-card">
-      <div class="award-icon"><i class="fas fa-code"></i></div>
-      <div class="award-year">2019 · Mérida, Mexico</div>
-      <h3 class="award-title">Second Place — HackSureste 2019</h3>
-      <p class="award-issuer">HackSureste Regional Hackathon</p>
-      <div class="award-location"><i class="fas fa-map-marker-alt" style="color:var(--gold);font-size:0.55rem"></i> Mérida, Mexico</div>
-      <p class="award-desc">Achieved second place in a prestigious regional hackathon that brings together innovators and entrepreneurs to solve technological challenges.</p>
-    </div>
+      <!-- ROL 4 — WIE Colombia Section -->
+      <div class="timeline-item" data-category="wie section">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="role-photo-slot">
+            <i class="fas fa-image photo-placeholder-icon"></i>
+            <span class="photo-placeholder-text">Agregar foto del rol</span>
+          </div>
+          <div class="card-meta">
+            <span class="card-period">Ene 2022 – Feb 2026</span>
+            <span class="card-tag">WIE · Sección</span>
+          </div>
+          <h3 class="card-title">Vicepresidenta – Grupo de Afinidad (WIE)</h3>
+          <p class="card-org">IEEE Colombian Section</p>
+          <p class="card-desc">Promover el rol de la mujer en ingeniería dentro de la Sección IEEE Colombia mediante eventos, actividades, concursos y visitas técnicas que incentiven la participación femenina en ciencia y tecnología.</p>
+          <ul class="card-achievements">
+            <li>Organicé el primer STEM WIE Colombia Camp 2024.</li>
+          </ul>
+        </div>
+      </div>
 
-    <div class="award-card">
-      <div class="award-icon"><i class="fas fa-robot"></i></div>
-      <div class="award-year">2018 · Bogotá, Colombia</div>
-      <h3 class="award-title">Mercury Challenge — Recognition for Participation</h3>
-      <p class="award-issuer">CUN — National &amp; International Teams</p>
-      <div class="award-location"><i class="fas fa-map-marker-alt" style="color:var(--gold);font-size:0.55rem"></i> Bogotá, Colombia</div>
-      <p class="award-desc">Prestigious robotics competition involving remote robot operation over 80 km to navigate a course and transport a component to a designated area.</p>
-    </div>
+      <!-- ROL 5 — RAS Colombia -->
+      <div class="timeline-item" data-category="section">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="role-photo-slot">
+            <i class="fas fa-image photo-placeholder-icon"></i>
+            <span class="photo-placeholder-text">Agregar foto del rol</span>
+          </div>
+          <div class="card-meta">
+            <span class="card-period">Ene 2024 – Dic 2025</span>
+            <span class="card-tag">Sección · Capítulo</span>
+          </div>
+          <h3 class="card-title">Vicepresidenta – Sociedad de Robótica y Automatización (RAS)</h3>
+          <p class="card-org">IEEE Colombian Chapter (RAS)</p>
+          <p class="card-desc">Apoyo en la organización y coordinación de competencias de robótica, ROS Meetups y proyectos nacionales. Fomento de la colaboración entre profesionales, investigadores y estudiantes.</p>
+          <ul class="card-achievements">
+            <li>Impulsé iniciativas IEEE RAS mediante eventos técnicos y actividades prácticas.</li>
+          </ul>
+        </div>
+      </div>
 
-    <div class="award-card">
-      <div class="award-icon"><i class="fas fa-plane"></i></div>
-      <div class="award-year">2019 (1st Semester) · Campeche, Mexico</div>
-      <h3 class="award-title">Academic Exchange Scholarship</h3>
-      <p class="award-issuer">Instituto Tecnológico Superior de Calkiní</p>
-      <div class="award-location"><i class="fas fa-map-marker-alt" style="color:var(--gold);font-size:0.55rem"></i> Campeche, Mexico</div>
-      <p class="award-desc">Scholarship to participate in an international academic exchange, expanding professional and academic horizons and contributing to technical and leadership skills development.</p>
-    </div>
+      <!-- ROL 6 — Coordinadora Comunicaciones Colombia -->
+      <div class="timeline-item" data-category="section">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="role-photo-slot">
+            <i class="fas fa-image photo-placeholder-icon"></i>
+            <span class="photo-placeholder-text">Agregar foto del rol</span>
+          </div>
+          <div class="card-meta">
+            <span class="card-period">Ene 2023 – Ene 2025</span>
+            <span class="card-tag">Sección</span>
+          </div>
+          <h3 class="card-title">Coordinadora de Comunicaciones Electrónicas</h3>
+          <p class="card-org">IEEE Colombian Section</p>
+          <p class="card-desc">Coordinación de las comunicaciones electrónicas de la Sección IEEE Colombia, garantizando la entrega oportuna y precisa de información a todos los miembros de la sección.</p>
+          <ul class="card-achievements"></ul>
+        </div>
+      </div>
 
-    <div class="award-card">
-      <div class="award-icon"><i class="fas fa-plane-departure"></i></div>
-      <div class="award-year">2018 (2nd Semester) · Campeche, Mexico</div>
-      <h3 class="award-title">Academic Exchange Scholarship</h3>
-      <p class="award-issuer">Instituto Tecnológico Superior de Calkiní</p>
-      <div class="award-location"><i class="fas fa-map-marker-alt" style="color:var(--gold);font-size:0.55rem"></i> Campeche, Mexico</div>
-    </div>
+      <!-- ROL 7 — MGA Global Student Activities (diferente al MGA SAC) -->
+      <div class="timeline-item" data-category="global mga">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="role-photo-slot">
+            <i class="fas fa-image photo-placeholder-icon"></i>
+            <span class="photo-placeholder-text">Agregar foto del rol</span>
+          </div>
+          <div class="card-meta">
+            <span class="card-period">Ene 2024 – Dic 2025</span>
+            <span class="card-tag">MGA · Global</span>
+          </div>
+          <h3 class="card-title">Actividades Estudiantiles — Comité Global de Actividades Estudiantiles MGA</h3>
+          <p class="card-org">IEEE MGA</p>
+          <p class="card-desc">Asistencia en la planificación y ejecución de actividades y eventos estudiantiles, colaborando con partes interesadas a nivel mundial para mejorar la experiencia del miembro IEEE.</p>
+          <ul class="card-achievements">
+            <li>Participé en la reunión presencial en Lisboa, Portugal (marzo 2024).</li>
+            <li>Contribuí con ideas para mejorar la experiencia del miembro IEEE a nivel global.</li>
+          </ul>
+        </div>
+      </div>
 
-    <div class="award-card">
-      <div class="award-icon"><i class="fas fa-globe-europe"></i></div>
-      <div class="award-year">2017 · Bucharest, Romania</div>
-      <h3 class="award-title">Robochallenge Romania — Certificate of Participation</h3>
-      <p class="award-issuer">Robochallenge International Event</p>
-      <div class="award-location"><i class="fas fa-map-marker-alt" style="color:var(--gold);font-size:0.55rem"></i> Bucharest, Romania</div>
-      <p class="award-desc">Competed in the Technological Impact category with the project <em>Submersible Robotic Platform for Embedded Measurements of Water Characteristics in Colombia's Hydric Sources</em>.</p>
-    </div>
+      <!-- ROL 8 — Coordinadora SAC Colombia Section -->
+      <div class="timeline-item" data-category="section">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="role-photo-slot">
+            <i class="fas fa-image photo-placeholder-icon"></i>
+            <span class="photo-placeholder-text">Agregar foto del rol</span>
+          </div>
+          <div class="card-meta">
+            <span class="card-period">Abr 2022 – Dic 2023</span>
+            <span class="card-tag">Sección · Estudiantil</span>
+          </div>
+          <h3 class="card-title">Coordinadora de Actividades Estudiantiles de Sección</h3>
+          <p class="card-org">IEEE Colombian Section</p>
+          <p class="card-desc">Coordinación de actividades para más de 50 ramas y 800 miembros estudiantes, garantizando participación activa en eventos locales y regionales.</p>
+          <ul class="card-achievements">
+            <li>Facilité la creación y reactivación de Ramas Estudiantiles en universidades de la región.</li>
+            <li>Supervisé eventos académicos, competencias y actividades extracurriculares de ingeniería y tecnología.</li>
+          </ul>
+        </div>
+      </div>
 
-    <div class="award-card" style="border-color: rgba(247,183,49,0.3); background: rgba(247,183,49,0.06);">
-      <div class="award-icon" style="background:rgba(247,183,49,0.2); border-color: var(--gold);"><i class="fas fa-crown"></i></div>
-      <div class="award-year">2017 · Quito, Ecuador</div>
-      <h3 class="award-title">First Place — Robot Games Zero Latitud 2017</h3>
-      <p class="award-issuer">Robot Games Zero Latitud — Category: Technological Impact</p>
-      <div class="award-location"><i class="fas fa-map-marker-alt" style="color:var(--gold);font-size:0.55rem"></i> Quito, Ecuador</div>
-      <p class="award-desc"><em>Submersible Robotic Platform for Embedded Measurements of Water Characteristics in Colombia's Hydric Sources</em> — Gold medal achievement in the international robotics competition.</p>
-    </div>
+      <!-- ROL 9 — Branch Chair México -->
+      <div class="timeline-item" data-category="student">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="role-photo-slot">
+            <i class="fas fa-image photo-placeholder-icon"></i>
+            <span class="photo-placeholder-text">Agregar foto del rol</span>
+          </div>
+          <div class="card-meta">
+            <span class="card-period">Abr 2019 – Jul 2020</span>
+            <span class="card-tag">Rama Estudiantil</span>
+          </div>
+          <h3 class="card-title">Presidenta de Rama Estudiantil</h3>
+          <p class="card-org">Instituto Tecnológico Superior de Calkiní — IEEE Mexico Section</p>
+          <p class="card-desc">Liderazgo y coordinación de actividades de la Rama Estudiantil IEEE en ITESCAM durante intercambio académico, gestionando membresía y participación estudiantil.</p>
+          <ul class="card-achievements">
+            <li>Participé en la creación de la Rama Estudiantil IEEE en ITESCAM.</li>
+            <li>Representé la rama en reuniones con otras ramas y organismos IEEE.</li>
+          </ul>
+        </div>
+      </div>
 
+      <!-- ROL 10 — Vice Chair ETITC -->
+      <div class="timeline-item" data-category="student">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="role-photo-slot">
+            <i class="fas fa-image photo-placeholder-icon"></i>
+            <span class="photo-placeholder-text">Agregar foto del rol</span>
+          </div>
+          <div class="card-meta">
+            <span class="card-period">Jun 2017 – Mar 2018</span>
+            <span class="card-tag">Rama Estudiantil</span>
+          </div>
+          <h3 class="card-title">Vicepresidenta – Rama Estudiantil</h3>
+          <p class="card-org">ETITC — IEEE Colombian Section</p>
+          <p class="card-desc">Gestión de la interacción entre ramas estudiantiles y diversas unidades organizacionales de IEEE para asegurar la integración de esfuerzos y recursos.</p>
+          <ul class="card-achievements"></ul>
+        </div>
+      </div>
+
+      <!-- ROL 11 — WIE Chair ETITC Student Branch -->
+      <div class="timeline-item" data-category="wie student">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="role-photo-slot">
+            <i class="fas fa-image photo-placeholder-icon"></i>
+            <span class="photo-placeholder-text">Agregar foto del rol</span>
+          </div>
+          <div class="card-meta">
+            <span class="card-period">Nov 2016 – Mar 2018</span>
+            <span class="card-tag">WIE · Estudiantil</span>
+          </div>
+          <h3 class="card-title">Presidenta Grupo de Afinidad – WIE</h3>
+          <p class="card-org">IEEE ETITC Student Branch — IEEE Colombian Section</p>
+          <p class="card-desc">Coordinación del grupo de afinidad WIE, promoviendo la inclusión de la mujer en ingeniería mediante eventos, talleres y conferencias que inspiran a jóvenes mujeres en STEM.</p>
+          <ul class="card-achievements">
+            <li>Colaboré con otras organizaciones para promover la diversidad y equidad de género en IEEE.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div><!-- fin timeline -->
+  </div>
+</section>
+
+<!-- ============================================================
+     RECONOCIMIENTOS
+============================================================ -->
+<section id="reconocimientos" aria-label="Reconocimientos y distinciones">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">02</span>
+      <h2 class="section-title">Reconocimientos <em>&amp; Distinciones</em></h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="awards-grid" id="awardsGrid">
+      <div class="award-card">
+        <div class="award-icon"><i class="fas fa-trophy"></i></div>
+        <div class="award-year">Marzo 2025 · Brasília, Brasil</div>
+        <h3 class="award-title">Premio Discrecional IEEE Región 9</h3>
+        <p class="award-issuer">IEEE América Latina Región 9</p>
+        <div class="award-location"><i class="fas fa-map-marker-alt"></i> Brasília, Brasil</div>
+        <p class="award-desc">Reconocimiento por liderazgo sobresaliente y contribuciones al avance de actividades estudiantiles y profesionales en América Latina y el Caribe.</p>
+      </div>
+      <div class="award-card">
+        <div class="award-icon"><i class="fas fa-medal"></i></div>
+        <div class="award-year">Noviembre 2024 · Bogotá, Colombia</div>
+        <h3 class="award-title">Reconocimiento por Dedicación y Apoyo</h3>
+        <p class="award-issuer">IEEE Colombia Section – Comité de Actividades Estudiantiles</p>
+        <div class="award-location"><i class="fas fa-map-marker-alt"></i> Bogotá, Colombia</div>
+        <p class="award-desc">Otorgado en apreciación de años de dedicación, liderazgo y apoyo continuo a las actividades estudiantiles dentro de la Sección.</p>
+      </div>
+      <div class="award-card">
+        <div class="award-icon"><i class="fas fa-users"></i></div>
+        <div class="award-year">Noviembre 2022 · Bogotá, Colombia</div>
+        <h3 class="award-title">Liderazgo Social — Contribución Comunitaria</h3>
+        <p class="award-issuer">ETITC</p>
+        <div class="award-location"><i class="fas fa-map-marker-alt"></i> Bogotá, Colombia</div>
+        <p class="award-desc">Reconoce liderazgo en proyectos sociales dentro de la comunidad de ingeniería, promoviendo compromiso social, inclusión y colaboración.</p>
+      </div>
+      <div class="award-card">
+        <div class="award-icon"><i class="fas fa-graduation-cap"></i></div>
+        <div class="award-year">Noviembre 2022 · Virtual</div>
+        <h3 class="award-title">Egresada IEEE VOLT</h3>
+        <p class="award-issuer">IEEE MGA</p>
+        <div class="award-location"><i class="fas fa-globe"></i> Virtual</div>
+      </div>
+      <div class="award-card">
+        <div class="award-icon"><i class="fas fa-star"></i></div>
+        <div class="award-year">Diciembre 2021 · Bogotá, Colombia</div>
+        <h3 class="award-title">Mejor Voluntaria AESS Colombia 2021</h3>
+        <p class="award-issuer">IEEE Aerospace and Electronic Systems Society (AESS)</p>
+        <div class="award-location"><i class="fas fa-map-marker-alt"></i> Bogotá, Colombia</div>
+        <p class="award-desc">Resalta dedicación y contribuciones como voluntaria en actividades de la sociedad, apoyando eventos de ingeniería aeroespacial y electrónica.</p>
+      </div>
+      <div class="award-card">
+        <div class="award-icon"><i class="fas fa-code"></i></div>
+        <div class="award-year">2019 · Mérida, México</div>
+        <h3 class="award-title">Segundo Lugar — HackSureste 2019</h3>
+        <p class="award-issuer">HackSureste Hackathon Regional</p>
+        <div class="award-location"><i class="fas fa-map-marker-alt"></i> Mérida, México</div>
+        <p class="award-desc">Segundo lugar en destacado hackathon regional que reúne innovadores para resolver desafíos tecnológicos.</p>
+      </div>
+      <div class="award-card">
+        <div class="award-icon"><i class="fas fa-robot"></i></div>
+        <div class="award-year">2018 · Bogotá, Colombia</div>
+        <h3 class="award-title">Mercury Challenge — Reconocimiento por Participación</h3>
+        <p class="award-issuer">CUN — Equipos Nacionales e Internacionales</p>
+        <div class="award-location"><i class="fas fa-map-marker-alt"></i> Bogotá, Colombia</div>
+        <p class="award-desc">Competencia de robótica con operación remota de robot a 80 km de distancia para navegar un circuito y transportar componentes a zona designada.</p>
+      </div>
+      <div class="award-card">
+        <div class="award-icon"><i class="fas fa-plane"></i></div>
+        <div class="award-year">2019 (1er Semestre) · Campeche, México</div>
+        <h3 class="award-title">Beca de Intercambio Académico</h3>
+        <p class="award-issuer">Instituto Tecnológico Superior de Calkiní</p>
+        <div class="award-location"><i class="fas fa-map-marker-alt"></i> Campeche, México</div>
+        <p class="award-desc">Beca para participar en intercambio académico internacional, ampliando horizontes profesionales y habilidades de liderazgo.</p>
+      </div>
+      <div class="award-card">
+        <div class="award-icon"><i class="fas fa-plane-departure"></i></div>
+        <div class="award-year">2018 (2do Semestre) · Campeche, México</div>
+        <h3 class="award-title">Beca de Intercambio Académico</h3>
+        <p class="award-issuer">Instituto Tecnológico Superior de Calkiní</p>
+        <div class="award-location"><i class="fas fa-map-marker-alt"></i> Campeche, México</div>
+      </div>
+      <div class="award-card">
+        <div class="award-icon"><i class="fas fa-globe-europe"></i></div>
+        <div class="award-year">2017 · Bucarest, Rumania</div>
+        <h3 class="award-title">Robochallenge Romania — Certificado de Participación</h3>
+        <p class="award-issuer">Robochallenge International Event</p>
+        <div class="award-location"><i class="fas fa-map-marker-alt"></i> Bucarest, Rumania</div>
+        <p class="award-desc">Competencia en la categoría Impacto Tecnológico con el proyecto <em>Plataforma Robótica Sumergible para Medición de Características del Agua en Colombia</em>.</p>
+      </div>
+      <div class="award-card award-highlight">
+        <div class="award-icon"><i class="fas fa-crown"></i></div>
+        <div class="award-year">2017 · Quito, Ecuador</div>
+        <h3 class="award-title">Primer Lugar — Robot Games Zero Latitud 2017</h3>
+        <p class="award-issuer">Robot Games Zero Latitud — Categoría: Impacto Tecnológico</p>
+        <div class="award-location"><i class="fas fa-map-marker-alt"></i> Quito, Ecuador</div>
+        <p class="award-desc"><em>Plataforma Robótica Sumergible para Medición de Características del Agua en Colombia</em> — Medalla de oro en competencia internacional de robótica.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     COMPROMISOS — RESUMEN EJECUTIVO (bloque 2 propuestas)
+============================================================ -->
+<section id="compromisos" aria-label="Compromisos de campaña">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Resumen</span>
+      <h2 class="section-title">Nuestros <em>Compromisos</em></h2>
+      <div class="section-line"></div>
+    </div>
+    <p class="compromisos-tagline">Un compromiso con el <em>futuro</em> de IEEE Colombia</p>
+    <p class="compromisos-sub">Plan de acción 2027–2028</p>
+    <div class="propuestas-grid">
+      <div class="propuesta-card">
+        <div class="propuesta-icon"><i class="fas fa-sitemap"></i></div>
+        <div class="propuesta-num">Pilar 01</div>
+        <h3 class="propuesta-title">Ramas Estudiantiles Fortalecidas</h3>
+        <p class="propuesta-desc">Mentorías, recursos y capacitaciones para sostener ramas activas en todo el territorio nacional.</p>
+      </div>
+      <div class="propuesta-card">
+        <div class="propuesta-icon"><i class="fas fa-globe-americas"></i></div>
+        <div class="propuesta-num">Pilar 02</div>
+        <h3 class="propuesta-title">Alianzas Internacionales</h3>
+        <p class="propuesta-desc">Proyección global de IEEE Colombia mediante cooperación con secciones y organismos internacionales.</p>
+      </div>
+      <div class="propuesta-card">
+        <div class="propuesta-icon"><i class="fas fa-wifi"></i></div>
+        <div class="propuesta-num">Pilar 03</div>
+        <h3 class="propuesta-title">Comunicación Digital Moderna</h3>
+        <p class="propuesta-desc">Plataformas y estrategias digitales para conectar mejor con cada miembro de IEEE Colombia.</p>
+      </div>
+      <div class="propuesta-card">
+        <div class="propuesta-icon"><i class="fas fa-seedling"></i></div>
+        <div class="propuesta-num">Pilar 04</div>
+        <h3 class="propuesta-title">Líderes del Mañana</h3>
+        <p class="propuesta-desc">Formación de nuevos líderes voluntarios para garantizar la sostenibilidad y crecimiento de IEEE Colombia.</p>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
   <div class="footer-left">
-    <strong>IEEE Professional Profile</strong><br>
-    Region 9 — Latin America &amp; Caribbean
+    <strong>Yesica Alejandra Giraldo Tique</strong><br>
+    Candidata a Presidente IEEE Colombia 2027–2028 · Región 9
   </div>
   <div class="footer-ieee">
     <span class="ieee-badge">IEEE</span>
-    <span style="font-family:var(--font-mono);font-size:0.6rem;color:var(--text-muted);letter-spacing:0.1em">Advancing Technology for Humanity</span>
+    <span style="font-family:var(--font-mono);font-size:0.58rem;color:rgba(255,255,255,0.38);letter-spacing:0.1em">Advancing Technology for Humanity</span>
   </div>
-  <div class="footer-right">2016 – 2026 · All Rights Reserved</div>
+  <div class="footer-right">2016 – <span id="currentYear"></span> · Todos los derechos reservados</div>
 </footer>
 
 <script>
-  /* ===========================
-     CURSOR
-  =========================== */
+  /* ─── CURSOR (solo desktop) ─── */
   const cursor = document.getElementById('cursor');
-  const ring = document.getElementById('cursorRing');
-  let mx = 0, my = 0, rx = 0, ry = 0;
+  const ring   = document.getElementById('cursorRing');
+  let mx=0, my=0, rx=0, ry=0;
   document.addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    cursor.style.left = mx + 'px';
-    cursor.style.top = my + 'px';
+    mx=e.clientX; my=e.clientY;
+    cursor.style.left=mx+'px'; cursor.style.top=my+'px';
   });
-  function animateRing() {
-    rx += (mx - rx) * 0.12;
-    ry += (my - ry) * 0.12;
-    ring.style.left = rx + 'px';
-    ring.style.top = ry + 'px';
-    requestAnimationFrame(animateRing);
-  }
-  animateRing();
-
-  document.querySelectorAll('a, button, .timeline-card, .award-card').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      cursor.style.transform = 'translate(-50%,-50%) scale(2)';
-      ring.style.transform = 'translate(-50%,-50%) scale(1.4)';
-      ring.style.borderColor = 'rgba(247,183,49,0.8)';
-    });
-    el.addEventListener('mouseleave', () => {
-      cursor.style.transform = 'translate(-50%,-50%) scale(1)';
-      ring.style.transform = 'translate(-50%,-50%) scale(1)';
-      ring.style.borderColor = 'rgba(247,183,49,0.5)';
-    });
+  (function animRing(){
+    rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12;
+    ring.style.left=rx+'px'; ring.style.top=ry+'px';
+    requestAnimationFrame(animRing);
+  })();
+  document.querySelectorAll('a, button, .timeline-card, .award-card, .propuesta-card').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{ cursor.style.transform='translate(-50%,-50%) scale(2.2)'; ring.style.borderColor='rgba(0,90,156,0.7)'; });
+    el.addEventListener('mouseleave',()=>{ cursor.style.transform='translate(-50%,-50%) scale(1)';   ring.style.borderColor='rgba(0,90,156,0.4)'; });
   });
 
-  /* ===========================
-     ANIMATED CANVAS BACKGROUND
-  =========================== */
+  /* ─── HAMBURGER MENÚ ─── */
+  const toggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  toggle.addEventListener('click', ()=> navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a=> a.addEventListener('click',()=> navLinks.classList.remove('open')));
+
+  /* ─── CANVAS FONDO — partículas azules suaves ─── */
   const canvas = document.getElementById('canvas-bg');
-  const ctx = canvas.getContext('2d');
-  let W, H, particles = [];
-
-  function resize() {
-    W = canvas.width = window.innerWidth;
-    H = canvas.height = window.innerHeight;
-  }
-  resize();
-  window.addEventListener('resize', resize);
-
-  function Particle() {
-    this.x = Math.random() * W;
-    this.y = Math.random() * H;
-    this.vx = (Math.random() - 0.5) * 0.3;
-    this.vy = (Math.random() - 0.5) * 0.3;
-    this.r = Math.random() * 1.5 + 0.3;
-    this.a = Math.random() * 0.4 + 0.1;
-  }
-  for (let i = 0; i < 90; i++) particles.push(new Particle());
-
-  function drawCanvas() {
-    ctx.clearRect(0, 0, W, H);
-    particles.forEach(p => {
-      p.x += p.vx; p.y += p.vy;
-      if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
-      if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
-
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(247,183,49,${p.a})`;
-      ctx.fill();
-    });
-    // Draw connections
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 120) {
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(0,98,155,${0.15 * (1 - dist / 120)})`;
-          ctx.lineWidth = 0.5;
-          ctx.stroke();
-        }
-      }
+  const ctx    = canvas.getContext('2d');
+  let W, H, pts=[];
+  function resize(){ W=canvas.width=window.innerWidth; H=canvas.height=window.innerHeight; }
+  resize(); window.addEventListener('resize', resize);
+  function Pt(){ this.x=Math.random()*W; this.y=Math.random()*H; this.vx=(Math.random()-.5)*.25; this.vy=(Math.random()-.5)*.25; this.r=Math.random()*1.8+.4; this.a=Math.random()*.18+.04; }
+  for(let i=0;i<70;i++) pts.push(new Pt());
+  (function draw(){
+    ctx.clearRect(0,0,W,H);
+    pts.forEach(p=>{ p.x+=p.vx; p.y+=p.vy; if(p.x<0)p.x=W; if(p.x>W)p.x=0; if(p.y<0)p.y=H; if(p.y>H)p.y=0; ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle=`rgba(0,90,156,${p.a})`; ctx.fill(); });
+    for(let i=0;i<pts.length;i++) for(let j=i+1;j<pts.length;j++){
+      const dx=pts[i].x-pts[j].x, dy=pts[i].y-pts[j].y, d=Math.sqrt(dx*dx+dy*dy);
+      if(d<120){ ctx.beginPath(); ctx.moveTo(pts[i].x,pts[i].y); ctx.lineTo(pts[j].x,pts[j].y); ctx.strokeStyle=`rgba(0,90,156,${.1*(1-d/120)})`; ctx.lineWidth=.5; ctx.stroke(); }
     }
-    requestAnimationFrame(drawCanvas);
+    requestAnimationFrame(draw);
+  })();
+
+  /* ─── NAVBAR SCROLL ─── */
+  window.addEventListener('scroll', ()=> document.getElementById('navbar').classList.toggle('scrolled', window.scrollY>60));
+
+  /* ─── AÑOS DE MEMBRESÍA — automático desde 2016 ─── */
+  const startY=2016, curY=new Date().getFullYear(), yrs=curY-startY;
+  document.getElementById('yearsCount').setAttribute('data-count', yrs);
+  const yl=document.getElementById('yearsLabel'); if(yl) yl.textContent=yrs;
+  const md=document.getElementById('membershipDetail'); if(md) md.textContent=`+${yrs} años de membresía activa`;
+  document.getElementById('currentYear').textContent=curY;
+
+  /* ─── CONTADORES ANIMADOS ─── */
+  function animCounter(el, target, dur=1800){
+    const big=target>=1000; let start=null;
+    (function step(ts){ if(!start)start=ts; const p=Math.min((ts-start)/dur,1), v=Math.floor(p*target); el.textContent=big?v.toLocaleString():v; if(p<1)requestAnimationFrame(step); else el.textContent=big?target.toLocaleString():target; })(performance.now());
   }
-  drawCanvas();
+  let started=false;
+  function startCounters(){ if(started)return; started=true; document.querySelectorAll('.stat-num[data-count]').forEach(el=>animCounter(el,parseInt(el.dataset.count))); }
+  setTimeout(startCounters,1400);
 
-  /* ===========================
-     NAVBAR SCROLL
-  =========================== */
-  const navbar = document.getElementById('navbar');
-  window.addEventListener('scroll', () => {
-    navbar.classList.toggle('scrolled', window.scrollY > 60);
-  });
+  /* ─── SCROLL REVEAL ─── */
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ setTimeout(()=>e.target.classList.add('visible'),+e.target.dataset.delay||0); obs.unobserve(e.target); }});
+  },{threshold:0.08});
+  document.querySelectorAll('.timeline-item').forEach((el,i)=>{ el.dataset.delay=i*80; obs.observe(el); });
+  document.querySelectorAll('.award-card').forEach((el,i)=>{ el.dataset.delay=i*60; obs.observe(el); });
+  document.querySelectorAll('.propuesta-card').forEach((el,i)=>{ el.dataset.delay=i*100; obs.observe(el); });
 
-  /* ===========================
-     COUNTER ANIMATION
-  =========================== */
-  function animateCounter(el, target, duration = 1800) {
-    const isLarge = target >= 1000;
-    let start = null;
-    function step(ts) {
-      if (!start) start = ts;
-      const progress = Math.min((ts - start) / duration, 1);
-      const val = Math.floor(progress * target);
-      el.textContent = isLarge ? val.toLocaleString() : val;
-      if (progress < 1) requestAnimationFrame(step);
-      else el.textContent = isLarge ? target.toLocaleString() : target;
-    }
-    requestAnimationFrame(step);
-  }
-
-  const counters = document.querySelectorAll('.stat-num[data-count]');
-  let countersStarted = false;
-  function startCounters() {
-    if (countersStarted) return;
-    countersStarted = true;
-    counters.forEach(el => animateCounter(el, parseInt(el.dataset.count)));
-  }
-  // Start after hero animations load
-  setTimeout(startCounters, 1200);
-
-  /* ===========================
-     SCROLL REVEAL
-  =========================== */
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        const delay = (entry.target.dataset.delay || 0);
-        setTimeout(() => entry.target.classList.add('visible'), delay);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12 });
-
-  document.querySelectorAll('.timeline-item').forEach((el, i) => {
-    el.dataset.delay = i * 80;
-    observer.observe(el);
-  });
-  document.querySelectorAll('.award-card').forEach((el, i) => {
-    el.dataset.delay = i * 60;
-    observer.observe(el);
-  });
-
-  /* ===========================
-     FILTER TABS
-  =========================== */
-  document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  /* ─── FILTROS VOLUNTARIADO ─── */
+  document.querySelectorAll('.filter-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
       btn.classList.add('active');
-      const filter = btn.dataset.filter;
-      document.querySelectorAll('.timeline-item').forEach(item => {
-        const cats = item.dataset.category || '';
-        const match = filter === 'all' || cats.includes(filter);
-        item.classList.toggle('hidden-filter', !match);
-        if (match && !item.classList.contains('visible')) {
-          setTimeout(() => item.classList.add('visible'), 80);
-        }
+      const f=btn.dataset.filter;
+      document.querySelectorAll('.timeline-item').forEach(item=>{
+        const c=item.dataset.category||'', match=f==='all'||c.includes(f);
+        item.classList.toggle('hidden-filter',!match);
+        if(match&&!item.classList.contains('visible')) setTimeout(()=>item.classList.add('visible'),80);
       });
     });
   });
 </script>
 </body>
 </html>
+

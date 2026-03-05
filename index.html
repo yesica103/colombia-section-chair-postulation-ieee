@@ -145,11 +145,11 @@
     .vision-headline { font-family: var(--font-display); font-size: clamp(1.9rem, 4.2vw, 3rem); font-weight: 400; color: var(--ieee-dark); line-height: 1.15; margin-bottom: 1.25rem; }
     .vision-headline em { color: var(--ieee-blue); font-style: italic; }
     .vision-body { font-size: clamp(0.9rem, 1.5vw, 1rem); color: var(--text-mid); line-height: 1.9; max-width: 36rem; }
-    .vision-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
-    .vm-item { padding: 1.3rem 1.1rem; background: var(--ieee-pale); border: 1px solid var(--border); border-radius: 0.625rem; display: flex; flex-direction: column; gap: 0.4rem; transition: all 0.28s; cursor: default; }
-    .vm-item:hover { background: var(--ieee-pale2); transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--border-mid); }
-    .vm-num { font-family: var(--font-display); font-size: clamp(1.7rem, 3vw, 2.3rem); font-weight: 600; color: var(--ieee-blue); line-height: 1; }
-    .vm-label { font-family: var(--font-mono); font-size: clamp(0.56rem, 1vw, 0.62rem); color: var(--text-muted); line-height: 1.55; letter-spacing: 0.03em; }
+    .ecosystem-visual { display: flex; flex-direction: column; align-items: center; gap: 1.2rem; }
+    .ecosystem-svg { width: 100%; max-width: 380px; height: auto; display: block; }
+    .ecosystem-legend { display: flex; flex-wrap: wrap; gap: 0.75rem 1.2rem; justify-content: center; }
+    .eco-leg-item { display: flex; align-items: center; gap: 0.45rem; font-family: var(--font-mono); font-size: 0.6rem; color: var(--text-muted); letter-spacing: 0.05em; }
+    .eco-leg-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
 
     /* ─── PROPUESTAS (protagonismo máximo) ─── */
     #propuestas {
@@ -176,36 +176,40 @@
       position: relative;
       overflow: hidden;
       transition: all 0.32s ease;
-      opacity: 0;
-      transform: translateY(1.375rem);
+      opacity: 1;
+      transform: translateY(0);
       box-shadow: 0 4px 20px rgba(0,0,0,0.12);
-      display: flex;
-      flex-direction: column;
+      display: block;
     }
-    .propuesta-card.visible { opacity: 1; transform: translateY(0); }
+    .propuesta-card.animate-ready { opacity: 0; transform: translateY(1.375rem); }
+    .propuesta-card.animate-ready.visible { opacity: 1; transform: translateY(0); }
     .propuesta-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, rgba(255,255,255,0.5), rgba(255,255,255,0.15)); transform: scaleX(0); transform-origin: left; transition: transform 0.38s ease; border-radius: 0.75rem 0.75rem 0 0; }
     .propuesta-card::after { content: attr(data-num); position: absolute; bottom: -0.5rem; right: 0.75rem; font-family: var(--font-display); font-size: 6rem; font-weight: 700; color: rgba(255,255,255,0.04); line-height: 1; pointer-events: none; user-select: none; }
     .propuesta-card:hover { border-color: rgba(255,255,255,0.25); box-shadow: 0 10px 40px rgba(0,0,0,0.25); transform: translateY(-5px); background: rgba(255,255,255,0.1); }
     .propuesta-card:hover::before { transform: scaleX(1); }
 
-    .propuesta-icon { width: clamp(2.6rem, 4.5vw, 3.2rem); height: clamp(2.6rem, 4.5vw, 3.2rem); border-radius: 0.75rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.18); display: flex; align-items: center; justify-content: center; font-size: clamp(1rem, 1.8vw, 1.15rem); color: rgba(255,255,255,0.82); margin-bottom: 1.3rem; flex-shrink: 0; transition: all 0.3s ease; }
+    /* Card interna: top fijo, lista crece, footer al fondo */
+    .propuesta-card-top { margin-bottom: 1rem; }
+    .propuesta-icon { width: clamp(2.6rem, 4.5vw, 3.2rem); height: clamp(2.6rem, 4.5vw, 3.2rem); border-radius: 0.75rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.18); display: flex; align-items: center; justify-content: center; font-size: clamp(1rem, 1.8vw, 1.15rem); color: rgba(255,255,255,0.82); margin-bottom: 1rem; flex-shrink: 0; transition: all 0.3s ease; }
     .propuesta-card:hover .propuesta-icon { background: rgba(255,255,255,0.2); color: var(--white); }
-    .propuesta-num { font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.2em; color: rgba(255,255,255,0.38); text-transform: uppercase; margin-bottom: 0.5rem; }
-    .propuesta-title { font-family: var(--font-display); font-size: clamp(1.1rem, 2vw, 1.4rem); font-weight: 600; color: var(--white); line-height: 1.25; margin-bottom: 0.85rem; }
-    .propuesta-desc { font-size: clamp(0.84rem, 1.4vw, 0.9rem); color: rgba(255,255,255,0.55); line-height: 1.8; flex: 1; }
-    .propuesta-desc em { color: rgba(255,255,255,0.78); font-style: italic; }
+    .propuesta-num { font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.2em; color: rgba(255,255,255,0.38); text-transform: uppercase; margin-bottom: 0.4rem; }
+    .propuesta-title { font-family: var(--font-display); font-size: clamp(1.1rem, 2vw, 1.35rem); font-weight: 600; color: var(--white); line-height: 1.25; margin-bottom: 0.5rem; }
+    .propuesta-tagline { font-size: clamp(0.8rem, 1.3vw, 0.86rem); color: rgba(255,255,255,0.5); font-style: italic; line-height: 1.5; }
 
-    .propuesta-card ul { list-style: none; margin-top: 0.75rem; display: flex; flex-direction: column; gap: 0.4rem; }
-    .propuesta-card ul li { font-size: clamp(0.78rem, 1.25vw, 0.84rem); color: rgba(255,255,255,0.5); line-height: 1.65; padding-left: 1.1rem; position: relative; }
-    .propuesta-card ul li::before { content: '›'; position: absolute; left: 0; color: rgba(255,255,255,0.35); font-size: 1rem; line-height: 1.4; }
+    /* Lista de bullets: tamaño natural, sin flex-grow */
+    .propuesta-list { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; margin-bottom: 1.2rem; }
+    .propuesta-list li { font-size: clamp(0.78rem, 1.25vw, 0.84rem); color: rgba(255,255,255,0.55); line-height: 1.65; padding-left: 1.1rem; position: relative; }
+    .propuesta-list li::before { content: '›'; position: absolute; left: 0; color: rgba(255,255,255,0.4); font-size: 1rem; line-height: 1.4; }
 
-    .propuesta-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.2rem; }
+    /* Footer: tags + badge, sin forzar al fondo */
+    .propuesta-footer { display: flex; flex-direction: column; gap: 0.55rem; }
+    .propuesta-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
     .propuesta-tag { font-family: var(--font-mono); font-size: 0.56rem; letter-spacing: 0.08em; padding: 0.22rem 0.65rem; border: 1px solid rgba(255,255,255,0.15); border-radius: 20px; color: rgba(255,255,255,0.55); background: rgba(255,255,255,0.07); text-transform: uppercase; }
 
-    .propuesta-year-badge { display: inline-flex; align-items: center; gap: 0.35rem; font-family: var(--font-mono); font-size: 0.56rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.22rem 0.65rem; border-radius: 20px; margin-top: 0.5rem; }
-    .propuesta-year-badge.y1 { background: rgba(255,200,0,0.12); border: 1px solid rgba(255,200,0,0.25); color: rgba(255,220,80,0.85); }
-    .propuesta-year-badge.y2 { background: rgba(100,200,255,0.1); border: 1px solid rgba(100,200,255,0.2); color: rgba(140,210,255,0.85); }
-    .propuesta-year-badge i { font-size: 0.5em; }
+    .propuesta-year-badge { display: inline-flex; align-items: center; gap: 0.35rem; font-family: var(--font-mono); font-size: 0.56rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.28rem 0.75rem; border-radius: 20px; width: fit-content; }
+    .propuesta-year-badge.y1 { background: rgba(255,200,0,0.12); border: 1px solid rgba(255,200,0,0.25); color: rgba(255,220,80,0.88); }
+    .propuesta-year-badge.y2 { background: rgba(100,200,255,0.1); border: 1px solid rgba(100,200,255,0.2); color: rgba(140,210,255,0.88); }
+    .propuesta-year-badge i { font-size: 0.45em; }
 
     /* ─── SECCIÓN SOBRE MÍ ─── */
     #inicio { background: var(--white); }
@@ -225,8 +229,10 @@
     #voluntariado { background: var(--surface-alt); }
     .timeline { position: relative; padding-left: clamp(1rem, 4vw, 2rem); }
     .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--ieee-blue), var(--border) 90%); border-radius: 2px; }
-    .timeline-item { position: relative; padding: 0 0 clamp(1.5rem,4vw,3rem) clamp(1.5rem,4vw,3rem); opacity: 0; transform: translateX(-1.125rem); transition: opacity 0.55s ease, transform 0.55s ease; }
-    .timeline-item.visible { opacity: 1; transform: translateX(0); }
+    .timeline-item { position: relative; padding: 0 0 clamp(1.5rem,4vw,3rem) clamp(1.5rem,4vw,3rem); opacity: 1; transform: translateX(0); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .timeline-item.animate-ready { opacity: 0; transform: translateX(-1.125rem); }
+    .timeline-item.animate-ready.visible { opacity: 1; transform: translateX(0); }
+    
     .timeline-item.hidden-filter { display: none; }
     .timeline-dot { position: absolute; left: clamp(-0.55rem,-1.2vw,-0.45rem); top: 0.4rem; width: 0.75rem; height: 0.75rem; border-radius: 50%; background: var(--ieee-blue); border: 2px solid var(--white); box-shadow: 0 0 0 2px var(--ieee-blue); }
     .timeline-card { background: var(--white); border: 1px solid var(--border); border-radius: 0.75rem; padding: var(--card-pad); transition: all 0.3s ease; position: relative; overflow: hidden; box-shadow: var(--shadow-sm); }
@@ -264,8 +270,9 @@
     /* ─── RECONOCIMIENTOS ─── */
     #reconocimientos { background: var(--white); border-top: 1px solid var(--border); }
     .awards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr)); gap: var(--gap-grid); }
-    .award-card { background: var(--white); border: 1px solid var(--border); border-radius: 0.75rem; padding: var(--card-pad); position: relative; overflow: hidden; opacity: 0; transform: translateY(1.125rem); transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s, border-color 0.3s; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; }
-    .award-card.visible { opacity: 1; transform: translateY(0); }
+    .award-card { background: var(--white); border: 1px solid var(--border); border-radius: 0.75rem; padding: var(--card-pad); position: relative; overflow: hidden; opacity: 1; transform: translateY(0); transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s, border-color 0.3s; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; }
+    .award-card.animate-ready { opacity: 0; transform: translateY(1.125rem); }
+    .award-card.animate-ready.visible { opacity: 1; transform: translateY(0); }
     .award-card:hover { border-color: var(--border-mid); box-shadow: var(--shadow-md); transform: translateY(-5px); }
     .award-card::after { content: ''; position: absolute; top: 0; left: 0; bottom: 0; width: 3px; background: var(--ieee-blue); border-radius: 3px 0 0 3px; transform: scaleY(0); transform-origin: top; transition: transform 0.35s ease; }
     .award-card:hover::after { transform: scaleY(1); }
@@ -338,7 +345,7 @@
       .stat-divider { width: auto; height: 1px; align-self: auto; }
       .stat-item { padding: 0.8rem 1.5rem; flex: 1 1 100%; }
       .vision-content { grid-template-columns: 1fr; gap: 2rem; }
-      .vision-metrics { grid-template-columns: 1fr 1fr; }
+      .ecosystem-svg { max-width: 300px; }
       .inicio-grid { grid-template-columns: 1fr; gap: 2rem; }
       .section-header { gap: 0.5rem; }
       .propuestas-grid, .awards-grid { grid-template-columns: 1fr; }
@@ -415,7 +422,7 @@
     <a href="https://www.linkedin.com/in/yesica-giraldo/" class="social-btn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
     <a href="https://www.instagram.com/giraldoyesika/" class="social-btn" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
     <a href="https://github.com/yesica103" class="social-btn" aria-label="GitHub"><i class="fab fa-github"></i></a>
-    <a href="mailto:yagiraldot@ieee.org" class="social-btn" aria-label="Email"><i class="fas fa-envelope"></i></a>
+    <a href="/cdn-cgi/l/email-protection#f78e96909e85969b939883b79e929292d9988590" class="social-btn" aria-label="Email"><i class="fas fa-envelope"></i></a>
   </div>
 
   <div class="scroll-hint"><span>Explorar</span><div class="scroll-line"></div></div>
@@ -442,22 +449,110 @@
           que transformará nuestra sección.
         </p>
       </div>
-      <div class="vision-metrics">
-        <div class="vm-item">
-          <span class="vm-num">13K+</span>
-          <span class="vm-label">Miembros estudiantiles coordinados como SAC Chair R9</span>
-        </div>
-        <div class="vm-item">
-          <span class="vm-num">$120K</span>
-          <span class="vm-label">USD en patrocinios asegurados — SBRM × 2 años</span>
-        </div>
-        <div class="vm-item">
-          <span class="vm-num">200+</span>
-          <span class="vm-label">Solicitudes de financiamiento revisadas y aprobadas</span>
-        </div>
-        <div class="vm-item">
-          <span class="vm-num">4</span>
-          <span class="vm-label">Pilares estratégicos para IEEE Colombia 2027–28</span>
+      <div class="ecosystem-visual">
+        <svg viewBox="0 0 380 380" xmlns="http://www.w3.org/2000/svg" class="ecosystem-svg" role="img" aria-label="Ecosistema IEEE Colombia">
+          <!-- Fondo -->
+          <defs>
+            <radialGradient id="bgGrad" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#E8F1FA"/>
+              <stop offset="100%" stop-color="#D0E4F5"/>
+            </radialGradient>
+            <radialGradient id="centerGrad" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#0066B2"/>
+              <stop offset="100%" stop-color="#003F87"/>
+            </radialGradient>
+            <filter id="soft-shadow">
+              <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="rgba(0,63,135,0.18)"/>
+            </filter>
+          </defs>
+
+          <!-- Círculo exterior decorativo punteado -->
+          <circle cx="190" cy="190" r="172" fill="none" stroke="#9BBEDD" stroke-width="1" stroke-dasharray="4 6" opacity="0.5"/>
+          <!-- Círculo guía intermedio -->
+          <circle cx="190" cy="190" r="120" fill="none" stroke="#C8DDF0" stroke-width="1" opacity="0.6"/>
+
+          <!-- Nodo central: IEEE Colombia Ecosistema -->
+          <circle cx="190" cy="190" r="58" fill="url(#centerGrad)" filter="url(#soft-shadow)"/>
+          <text x="190" y="181" text-anchor="middle" font-family="'Playfair Display', serif" font-size="13" font-weight="600" fill="white">Ecosistema</text>
+          <text x="190" y="196" text-anchor="middle" font-family="'Playfair Display', serif" font-size="11" fill="rgba(255,255,255,0.8)">IEEE</text>
+          <text x="190" y="210" text-anchor="middle" font-family="'Playfair Display', serif" font-size="11" fill="rgba(255,255,255,0.8)">Colombia</text>
+
+          <!-- Líneas conectoras desde centro a nodos -->
+          <line x1="190" y1="132" x2="190" y2="88"  stroke="#9BBEDD" stroke-width="1.5"/>
+          <line x1="248" y1="190" x2="302" y2="190" stroke="#9BBEDD" stroke-width="1.5"/>
+          <line x1="190" y1="248" x2="190" y2="300" stroke="#9BBEDD" stroke-width="1.5"/>
+          <line x1="132" y1="190" x2="78"  y2="190" stroke="#9BBEDD" stroke-width="1.5"/>
+
+          <!-- PILAR 01 — Contenido Técnico (arriba) -->
+          <circle cx="190" cy="68" r="38" fill="white" stroke="#C8DDF0" stroke-width="1.5" filter="url(#soft-shadow)"/>
+          <text x="190" y="57" text-anchor="middle" font-family="'DM Mono', monospace" font-size="8.5" fill="#005A9C" letter-spacing="1">PILAR 01</text>
+          <text x="190" y="71" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="8" font-weight="600" fill="#0D1B2A">Contenido</text>
+          <text x="190" y="82" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="8" font-weight="600" fill="#0D1B2A">Técnico</text>
+
+          <!-- PILAR 02 — Industria (derecha) -->
+          <circle cx="322" cy="190" r="38" fill="white" stroke="#C8DDF0" stroke-width="1.5" filter="url(#soft-shadow)"/>
+          <text x="322" y="179" text-anchor="middle" font-family="'DM Mono', monospace" font-size="8.5" fill="#005A9C" letter-spacing="1">PILAR 02</text>
+          <text x="322" y="193" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="8" font-weight="600" fill="#0D1B2A">Industria e</text>
+          <text x="322" y="204" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="8" font-weight="600" fill="#0D1B2A">Innovación</text>
+
+          <!-- PILAR 03 — Digital (abajo) -->
+          <circle cx="190" cy="320" r="38" fill="white" stroke="#C8DDF0" stroke-width="1.5" filter="url(#soft-shadow)"/>
+          <text x="190" y="309" text-anchor="middle" font-family="'DM Mono', monospace" font-size="8.5" fill="#005A9C" letter-spacing="1">PILAR 03</text>
+          <text x="190" y="323" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="8" font-weight="600" fill="#0D1B2A">Trans.</text>
+          <text x="190" y="334" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="8" font-weight="600" fill="#0D1B2A">Digital</text>
+
+          <!-- PILAR 04 — Liderazgo (izquierda) -->
+          <circle cx="58" cy="190" r="38" fill="white" stroke="#C8DDF0" stroke-width="1.5" filter="url(#soft-shadow)"/>
+          <text x="58" y="179" text-anchor="middle" font-family="'DM Mono', monospace" font-size="8.5" fill="#005A9C" letter-spacing="1">PILAR 04</text>
+          <text x="58" y="193" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="8" font-weight="600" fill="#0D1B2A">Liderazgo</text>
+          <text x="58" y="204" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="8" font-weight="600" fill="#0D1B2A">Voluntario</text>
+
+          <!-- Nodos beneficiarios: Estudiantes y Profesionales -->
+          <!-- Líneas diagonales desde centro -->
+          <line x1="149" y1="149" x2="108" y2="105" stroke="#9BBEDD" stroke-width="1" stroke-dasharray="3 4"/>
+          <line x1="231" y1="149" x2="274" y2="105" stroke="#9BBEDD" stroke-width="1" stroke-dasharray="3 4"/>
+          <line x1="149" y1="231" x2="108" y2="272" stroke="#9BBEDD" stroke-width="1" stroke-dasharray="3 4"/>
+          <line x1="231" y1="231" x2="274" y2="272" stroke="#9BBEDD" stroke-width="1" stroke-dasharray="3 4"/>
+
+          <!-- Nodo Estudiantes (diagonal arriba-izq) -->
+          <rect x="68" y="70" width="70" height="50" rx="10" fill="#003F87" filter="url(#soft-shadow)"/>
+          <text x="103" y="88" text-anchor="middle" font-family="'DM Mono', monospace" font-size="7.5" fill="rgba(255,255,255,0.7)" letter-spacing="0.5">ESTUDIANTES</text>
+          <text x="103" y="101" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="7.5" fill="rgba(255,255,255,0.85)">Formación · Red</text>
+          <text x="103" y="112" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="7.5" fill="rgba(255,255,255,0.85)">Oportunidades</text>
+
+          <!-- Nodo Profesionales (diagonal arriba-der) -->
+          <rect x="242" y="70" width="70" height="50" rx="10" fill="#005A9C" filter="url(#soft-shadow)"/>
+          <text x="277" y="88" text-anchor="middle" font-family="'DM Mono', monospace" font-size="7.5" fill="rgba(255,255,255,0.7)" letter-spacing="0.5">PROFESION.</text>
+          <text x="277" y="101" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="7.5" fill="rgba(255,255,255,0.85)">Industria · Senior</text>
+          <text x="277" y="112" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="7.5" fill="rgba(255,255,255,0.85)">Networking</text>
+
+          <!-- Nodo Visibilidad (diagonal abajo-izq) -->
+          <rect x="68" y="258" width="70" height="50" rx="10" fill="#003F87" filter="url(#soft-shadow)"/>
+          <text x="103" y="276" text-anchor="middle" font-family="'DM Mono', monospace" font-size="7.5" fill="rgba(255,255,255,0.7)" letter-spacing="0.5">VISIBILIDAD</text>
+          <text x="103" y="289" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="7.5" fill="rgba(255,255,255,0.85)">Digital · Medios</text>
+          <text x="103" y="300" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="7.5" fill="rgba(255,255,255,0.85)">Comunicación</text>
+
+          <!-- Nodo Impacto (diagonal abajo-der) -->
+          <rect x="242" y="258" width="70" height="50" rx="10" fill="#005A9C" filter="url(#soft-shadow)"/>
+          <text x="277" y="276" text-anchor="middle" font-family="'DM Mono', monospace" font-size="7.5" fill="rgba(255,255,255,0.7)" letter-spacing="0.5">IMPACTO</text>
+          <text x="277" y="289" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="7.5" fill="rgba(255,255,255,0.85)">Colombia · R9</text>
+          <text x="277" y="300" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="7.5" fill="rgba(255,255,255,0.85)">Global</text>
+        </svg>
+
+        <!-- Leyenda debajo del SVG -->
+        <div class="ecosystem-legend">
+          <div class="eco-leg-item">
+            <span class="eco-leg-dot" style="background:#003F87"></span>
+            <span>Valor para estudiantes</span>
+          </div>
+          <div class="eco-leg-item">
+            <span class="eco-leg-dot" style="background:#005A9C"></span>
+            <span>Valor para profesionales</span>
+          </div>
+          <div class="eco-leg-item">
+            <span class="eco-leg-dot" style="background:white;border:1.5px solid #9BBEDD"></span>
+            <span>Pilares estratégicos</span>
+          </div>
         </div>
       </div>
     </div>
@@ -478,80 +573,96 @@
     <div class="propuestas-grid">
 
       <div class="propuesta-card" data-num="01">
-        <div class="propuesta-icon"><i class="fas fa-sitemap"></i></div>
-        <div class="propuesta-num">Pilar 01</div>
-        <h3 class="propuesta-title">Fortalecimiento del Contenido Técnico y Educativo</h3>
-        <p class="propuesta-desc"><em>El conocimiento es la base del ecosistema.</em></p>
-        <ul class="propuesta-desc">
+        <div class="propuesta-card-top">
+          <div class="propuesta-icon"><i class="fas fa-sitemap"></i></div>
+          <div class="propuesta-num">Pilar 01</div>
+          <h3 class="propuesta-title">Fortalecimiento del Contenido Técnico y Educativo</h3>
+          <p class="propuesta-tagline">El conocimiento es la base del ecosistema.</p>
+        </div>
+        <ul class="propuesta-list">
           <li>Programación nacional de contenido técnico de alto nivel, coordinada entre capítulos.</li>
           <li>Apoyo activo en la articulación entre los capítulos técnicos y grupos de afinidad.</li>
           <li>Mantenimiento y fortalecimiento de los congresos insignia de capítulos y affinity groups.</li>
         </ul>
-        <div class="propuesta-tags">
-          <span class="propuesta-tag">Educación</span>
-          <span class="propuesta-tag">Estudiantes</span>
-          <span class="propuesta-tag">Regiones</span>
+        <div class="propuesta-footer">
+          <div class="propuesta-tags">
+            <span class="propuesta-tag">Educación</span>
+            <span class="propuesta-tag">Estudiantes</span>
+            <span class="propuesta-tag">Regiones</span>
+          </div>
+          <span class="propuesta-year-badge y1"><i class="fas fa-circle"></i> Acción Año 1</span>
         </div>
-        <span class="propuesta-year-badge y1"><i class="fas fa-circle"></i> Acción Año 1</span>
       </div>
 
       <div class="propuesta-card" data-num="02">
-        <div class="propuesta-icon"><i class="fas fa-rocket"></i></div>
-        <div class="propuesta-num">Pilar 02</div>
-        <h3 class="propuesta-title">Industria, Innovación y Emprendimiento</h3>
-        <p class="propuesta-desc"><em>El conocimiento debe conectarse con el mercado.</em></p>
-        <ul class="propuesta-desc">
+        <div class="propuesta-card-top">
+          <div class="propuesta-icon"><i class="fas fa-rocket"></i></div>
+          <div class="propuesta-num">Pilar 02</div>
+          <h3 class="propuesta-title">Industria, Innovación y Emprendimiento</h3>
+          <p class="propuesta-tagline">El conocimiento debe conectarse con el mercado.</p>
+        </div>
+        <ul class="propuesta-list">
           <li>Incentivar la creación de Local Groups de emprendimiento en distintas regiones del país.</li>
           <li>Organización de eventos de startups y fortalecimiento del ecosistema de innovación.</li>
           <li>Creación y fortalecimiento de una red nacional de networking técnico-industrial.</li>
           <li>Vinculación estratégica con empresas para apoyar iniciativas técnicas y proyectos innovadores.</li>
         </ul>
-        <div class="propuesta-tags">
-          <span class="propuesta-tag">Industria</span>
-          <span class="propuesta-tag">Innovación</span>
-          <span class="propuesta-tag">Emprendimiento</span>
+        <div class="propuesta-footer">
+          <div class="propuesta-tags">
+            <span class="propuesta-tag">Industria</span>
+            <span class="propuesta-tag">Innovación</span>
+            <span class="propuesta-tag">Emprendimiento</span>
+          </div>
+          <span class="propuesta-year-badge y1"><i class="fas fa-circle"></i> Acción Año 1</span>
         </div>
-        <span class="propuesta-year-badge y1"><i class="fas fa-circle"></i> Acción Año 1</span>
       </div>
 
       <div class="propuesta-card" data-num="03">
-        <div class="propuesta-icon"><i class="fas fa-broadcast-tower"></i></div>
-        <div class="propuesta-num">Pilar 03</div>
-        <h3 class="propuesta-title">Transformación Digital y Comunicación Estratégica</h3>
-        <p class="propuesta-desc"><em>Un ecosistema necesita visibilidad y herramientas modernas.</em></p>
-        <ul class="propuesta-desc">
+        <div class="propuesta-card-top">
+          <div class="propuesta-icon"><i class="fas fa-broadcast-tower"></i></div>
+          <div class="propuesta-num">Pilar 03</div>
+          <h3 class="propuesta-title">Transformación Digital y Comunicación Estratégica</h3>
+          <p class="propuesta-tagline">Un ecosistema necesita visibilidad y herramientas modernas.</p>
+        </div>
+        <ul class="propuesta-list">
           <li>Estrategia nacional coordinada de redes sociales.</li>
           <li>Newsletter grupal y segmentado por perfil de miembro (estudiante, profesional, industria).</li>
           <li>Creación de un banco nacional de fundings, convocatorias y oportunidades.</li>
           <li>Banco de templates y guías para la solicitud de financiamiento de iniciativas.</li>
           <li>Sistema de comunicación interna más articulado entre OUs.</li>
         </ul>
-        <div class="propuesta-tags">
-          <span class="propuesta-tag">Digital</span>
-          <span class="propuesta-tag">Comunicación</span>
-          <span class="propuesta-tag">Herramientas</span>
+        <div class="propuesta-footer">
+          <div class="propuesta-tags">
+            <span class="propuesta-tag">Digital</span>
+            <span class="propuesta-tag">Comunicación</span>
+            <span class="propuesta-tag">Herramientas</span>
+          </div>
+          <span class="propuesta-year-badge y2"><i class="fas fa-circle"></i> Acción Año 1–2</span>
         </div>
-        <span class="propuesta-year-badge y2"><i class="fas fa-circle"></i> Acción Año 1–2</span>
       </div>
 
       <div class="propuesta-card" data-num="04">
-        <div class="propuesta-icon"><i class="fas fa-hands-helping"></i></div>
-        <div class="propuesta-num">Pilar 04</div>
-        <h3 class="propuesta-title">Liderazgo, Continuidad y Fortalecimiento del Voluntariado</h3>
-        <p class="propuesta-desc"><em>Sin liderazgo sólido, el ecosistema no se sostiene.</em></p>
-        <ul class="propuesta-desc">
+        <div class="propuesta-card-top">
+          <div class="propuesta-icon"><i class="fas fa-hands-helping"></i></div>
+          <div class="propuesta-num">Pilar 04</div>
+          <h3 class="propuesta-title">Liderazgo, Continuidad y Fortalecimiento del Voluntariado</h3>
+          <p class="propuesta-tagline">Sin liderazgo sólido, el ecosistema no se sostiene.</p>
+        </div>
+        <ul class="propuesta-list">
           <li>Manuales de transición y continuidad para cargos clave en OUs profesionales y estudiantiles.</li>
           <li>Programas de formación para voluntarios con enfoque en liderazgo, gestión y planeación estratégica.</li>
           <li>Programas de bienestar y acompañamiento para el liderazgo activo.</li>
           <li>Sistema anual de premios y reconocimientos alineado con MGA Awards.</li>
           <li>Apoyo en la postulación a Senior Member y convocatorias promovidas por MGA.</li>
         </ul>
-        <div class="propuesta-tags">
-          <span class="propuesta-tag">Liderazgo</span>
-          <span class="propuesta-tag">Voluntariado</span>
-          <span class="propuesta-tag">Continuidad</span>
+        <div class="propuesta-footer">
+          <div class="propuesta-tags">
+            <span class="propuesta-tag">Liderazgo</span>
+            <span class="propuesta-tag">Voluntariado</span>
+            <span class="propuesta-tag">Continuidad</span>
+          </div>
+          <span class="propuesta-year-badge y2"><i class="fas fa-circle"></i> Acción Año 2</span>
         </div>
-        <span class="propuesta-year-badge y2"><i class="fas fa-circle"></i> Acción Año 2</span>
       </div>
 
     </div>
@@ -879,7 +990,7 @@
         y juntos podemos hacerlo latir más fuerte.
       </p>
       <div class="cta-buttons">
-        <a href="mailto:yagiraldot@ieee.org" class="cta-btn-primary"><i class="fas fa-envelope"></i> &nbsp;Contactar a Yesica</a>
+        <a href="/cdn-cgi/l/email-protection#cfb6aea8a6bdaea3aba0bb8fa6aaaaaae1a0bda8" class="cta-btn-primary"><i class="fas fa-envelope"></i> &nbsp;Contactar a Yesica</a>
         <a href="https://www.linkedin.com/in/yesica-giraldo/" target="_blank" rel="noopener" class="cta-btn-secondary"><i class="fab fa-linkedin-in"></i> &nbsp;LinkedIn</a>
       </div>
       <div class="cta-societies">
@@ -908,7 +1019,7 @@
 </footer>
 
 <!-- ─── SCRIPTS ─── -->
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   /* ── Cursor ── */
   const cursor = document.getElementById('cursor');
   const ring   = document.getElementById('cursorRing');
@@ -966,9 +1077,9 @@
   const obs=new IntersectionObserver(entries=>{
     entries.forEach(e=>{ if(e.isIntersecting){ setTimeout(()=>e.target.classList.add('visible'),+e.target.dataset.delay||0); obs.unobserve(e.target); }});
   },{threshold:0.08});
-  document.querySelectorAll('.timeline-item').forEach((el,i)=>{ el.dataset.delay=i*80; obs.observe(el); });
-  document.querySelectorAll('.award-card').forEach((el,i)=>{ el.dataset.delay=i*60; obs.observe(el); });
-  document.querySelectorAll('.propuesta-card').forEach((el,i)=>{ el.dataset.delay=i*100; obs.observe(el); });
+  document.querySelectorAll('.timeline-item').forEach((el,i)=>{ el.classList.add('animate-ready'); el.dataset.delay=i*80; obs.observe(el); });
+  document.querySelectorAll('.award-card').forEach((el,i)=>{ el.classList.add('animate-ready'); el.dataset.delay=i*60; obs.observe(el); });
+  document.querySelectorAll('.propuesta-card').forEach((el,i)=>{ el.classList.add('animate-ready'); el.dataset.delay=i*100; obs.observe(el); });
 
   /* ── Filtros de trayectoria ── */
   document.querySelectorAll('.filter-btn').forEach(btn=>{
@@ -1027,10 +1138,4 @@
         dotsContainer.appendChild(dot);
       }
     }
-    startAutoplay(id);
-    carousel.addEventListener('mouseenter', () => stopAutoplay(id));
-    carousel.addEventListener('mouseleave', () => startAutoplay(id));
-  });
-</script>
-</body>
-</html>
+  

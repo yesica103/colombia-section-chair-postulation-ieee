@@ -1442,4 +1442,65 @@ document.addEventListener('DOMContentLoaded', function() {
 
   /* ── YEAR ── */
   var cY = document.getElementById('currentYear');
-  if(cY) cY.textContent = new Date().getFull
+  if(cY) cY.textContent = new Date().getFullYear();
+  var mD = document.getElementById('membershipDetail');
+  if(mD) mD.textContent = '+' + (new Date().getFullYear() - 2016) + ' años de membresía activa';
+
+  /* ── HERO CAROUSEL ── */
+  (function() {
+    var slides = document.querySelectorAll('#carouselTrack .carousel-hero-slide');
+    var track = document.getElementById('carouselTrack');
+    var dotsWrap = document.getElementById('heroDots');
+    var thumbsWrap = document.getElementById('galleryThumbs');
+    var current = 0;
+    var timer;
+    var total = slides.length;
+
+    slides.forEach(function(slide, i) {
+      var dot = document.createElement('button');
+      dot.className = 'c-dot' + (i === 0 ? ' active' : '');
+      dot.onclick = function() { goTo(i); };
+      if(dotsWrap) dotsWrap.appendChild(dot);
+
+      var thumb = document.createElement('div');
+      thumb.className = 'gallery-thumb' + (i === 0 ? ' active-thumb' : '');
+      var img = slide.querySelector('img');
+      if (img && img.complete && img.naturalWidth > 0) {
+        var tImg = document.createElement('img');
+        tImg.src = img.src;
+        tImg.alt = img.alt;
+        tImg.onerror = function() { thumb.innerHTML = '<span class="gallery-thumb-placeholder"><i class="fas fa-image"></i></span>'; };
+        thumb.appendChild(tImg);
+      } else {
+        thumb.innerHTML = '<span class="gallery-thumb-placeholder"><i class="fas fa-image"></i></span>';
+      }
+      thumb.onclick = function() { goTo(i); };
+      if(thumbsWrap) thumbsWrap.appendChild(thumb);
+    });
+
+    function goTo(n) {
+      if(!track || total === 0) return;
+      current = (n + total) % total;
+      track.style.transform = 'translateX(-' + (current * 100) + '%)';
+      document.querySelectorAll('#heroDots .c-dot').forEach(function(d, i) { d.classList.toggle('active', i === current); });
+      document.querySelectorAll('#galleryThumbs .gallery-thumb').forEach(function(t, i) { t.classList.toggle('active-thumb', i === current); });
+      resetTimer();
+    }
+
+    function resetTimer() { clearInterval(timer); timer = setInterval(function() { goTo(current + 1); }, 4000); }
+
+    window.moveHeroCarousel = function(dir) { goTo(current + dir); };
+
+    var mc = document.getElementById('mainCarousel');
+    if(mc) {
+      mc.addEventListener('mouseenter', function() { clearInterval(timer); });
+      mc.addEventListener('mouseleave', resetTimer);
+    }
+
+    if(total > 0) resetTimer();
+  })();
+
+});
+</script>
+</body>
+</html>

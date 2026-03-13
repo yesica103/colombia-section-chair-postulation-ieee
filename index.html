@@ -37,6 +37,23 @@
     body { font-family: var(--f-body); background: var(--white); color: var(--ink); overflow-x: hidden; line-height: 1.7; }
     img { display: block; max-width: 100%; object-fit: cover; }
 
+
+    /* ── HERO PHOTO ── */
+    .hero-photo-wrap { display: flex; justify-content: center; }
+    .hero-photo-ring {
+      width: clamp(90px,14vw,120px); height: clamp(90px,14vw,120px);
+      border-radius: 50%;
+      border: 3px solid rgba(255,255,255,0.85);
+      box-shadow: 0 0 0 6px rgba(255,255,255,0.12), 0 16px 48px rgba(0,0,0,0.3);
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--blue-800), var(--blue-500));
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hero-photo-ring img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .hero-photo-initials {
+      font-family: var(--f-display); font-size: 2rem; font-weight: 600;
+      color: rgba(255,255,255,0.9); letter-spacing: 0.05em;
+    }
     /* ── CURSOR ── */
     .cursor-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--blue-500); position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); }
     .cursor-ring { width: 32px; height: 32px; border-radius: 50%; border: 1.5px solid rgba(0,107,184,0.35); position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: all 0.15s ease; }
@@ -328,12 +345,10 @@
     .tl-title { font-family: var(--f-display); font-size: 1.05rem; font-weight: 600; color: var(--ink); line-height: 1.3; margin-bottom: 0.2rem; }
     .tl-org { font-family: var(--f-mono); font-size: 0.62rem; color: var(--blue-600); letter-spacing: 0.05em; margin-bottom: 0.6rem; }
     .tl-desc { font-size: 0.85rem; color: var(--ink-soft); line-height: 1.75; margin-bottom: 0.75rem; }
-    .tl-achievements { list-style: none; display: none; flex-direction: column; gap: 0.4rem; margin-bottom: 0.5rem; }
-    .tl-achievements.open { display: flex; }
+    .tl-achievements { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 0.5rem; }
+
     .tl-achievements li { font-size: 0.8rem; color: var(--ink-soft); padding-left: 1rem; position: relative; line-height: 1.6; }
     .tl-achievements li::before { content: '✦'; position: absolute; left: 0; color: var(--gold); font-size: 0.5rem; line-height: 2; }
-    .tl-toggle { font-size: 0.72rem; color: var(--blue-600); background: none; border: none; cursor: pointer; font-family: var(--f-body); font-weight: 600; padding: 0; transition: color 0.2s; }
-    .tl-toggle:hover { color: var(--blue-800); }
 
     /* ── LOGROS ── */
     #logros { background: white; }
@@ -574,6 +589,12 @@
   <section id="hero" aria-label="Candidatura Yesica Giraldo">
     <canvas class="hero-particle-canvas" id="heroCanvas"></canvas>
     <div class="hero-inner">
+      <div class="hero-photo-wrap" style="opacity:0;animation:rise 0.7s 0.1s forwards;margin-bottom:1.4rem;">
+        <div class="hero-photo-ring">
+          <img src="images/foto-yesica.jpg" alt="Yesica Giraldo"
+            onerror="this.parentElement.innerHTML='<div class=hero-photo-initials>YG</div>'">
+        </div>
+      </div>
       <div class="hero-eyebrow">
         <span class="eyebrow-dot"></span>
         IEEE Colombia · Candidatura a Presidencia 2027–2028
@@ -597,16 +618,7 @@
         <a href="#propuestas" class="btn-primary"><i class="fas fa-compass"></i> Conoce el Plan</a>
         <a href="#compromiso" class="btn-ghost"><i class="fas fa-handshake"></i> Mi Compromiso</a>
       </div>
-      <div class="hero-stats">
-        <div class="h-stat">
-          <div class="h-stat-num" data-count="10">0</div>
-          <div class="h-stat-label">Años de voluntariado</div>
-        </div>
-        <div class="h-stat">
-          <div class="h-stat-num" data-count="4">0</div>
-          <div class="h-stat-label">Pilares estratégicos</div>
-        </div>
-      </div>
+
     </div>
     <div class="scroll-indicator">
       <span>Descubrir</span>
@@ -912,7 +924,6 @@
               <li>Participación en reuniones del SAC Global con representantes de todas las regiones IEEE.</li>
               <li>Contribución al desarrollo de políticas y programas para miembros estudiantiles.</li>
             </ul>
-            <button class="tl-toggle" onclick="toggleAchievements(this)">+ Ver logros</button>
           </div>
         </div>
 
@@ -931,7 +942,6 @@
               <li>Amplificación de iniciativas globales de emprendimiento tecnológico en la comunidad IEEE.</li>
               <li>Coordinación con equipos internacionales para comunicación unificada y efectiva.</li>
             </ul>
-            <button class="tl-toggle" onclick="toggleAchievements(this)">+ Ver logros</button>
           </div>
         </div>
 
@@ -951,7 +961,6 @@
               <li>Apoyé y lideré la reactivación de la Revista Estudiantil Regional — <em>Enlaces</em>.</li>
               <li>Creé el Programa SPARK — 2 ediciones, alcanzando 30 de 36 secciones.</li>
             </ul>
-            <button class="tl-toggle" onclick="toggleAchievements(this)">+ Ver logros</button>
           </div>
         </div>
 
@@ -972,7 +981,6 @@
               <li>Coordinación de encuentros mensuales con miembros WIE de la sección.</li>
               <li>Participación en el WIE Region 9 Meeting.</li>
             </ul>
-            <button class="tl-toggle" onclick="toggleAchievements(this)">+ Ver logros</button>
           </div>
         </div>
 
@@ -990,7 +998,6 @@
               <li>Impulso de iniciativas de IEEE RAS a través de eventos técnicos y actividades prácticas.</li>
               <li>Apoyo en la redacción de propuestas y fortalecimiento de la relación con comunidades RAS para aplicar al programa Technical Education Program (TEP).</li>
             </ul>
-            <button class="tl-toggle" onclick="toggleAchievements(this)">+ Ver logros</button>
           </div>
         </div>
 
@@ -1009,7 +1016,6 @@
               <li>Desarrollo y gestión de la comunidad de WhatsApp de IEEE Colombia.</li>
               <li>Apoyo en la actualización y mantenimiento del sitio web de la Sección IEEE Colombia.</li>
             </ul>
-            <button class="tl-toggle" onclick="toggleAchievements(this)">+ Ver logros</button>
           </div>
         </div>
 
@@ -1027,7 +1033,6 @@
               <li>Participé en la reunión presencial en Lisboa, Portugal (marzo 2024) y Panamá (2025).</li>
               <li>Contribuí con ideas para mejorar la experiencia del miembro IEEE a nivel global.</li>
             </ul>
-            <button class="tl-toggle" onclick="toggleAchievements(this)">+ Ver logros</button>
           </div>
         </div>
 
@@ -1045,7 +1050,6 @@
               <li>Facilité la creación y reactivación de Ramas Estudiantiles en universidades de la región.</li>
               <li>Supervisé eventos académicos, competencias y actividades extracurriculares.</li>
             </ul>
-            <button class="tl-toggle" onclick="toggleAchievements(this)">+ Ver logros</button>
           </div>
         </div>
 
@@ -1063,7 +1067,6 @@
               <li>Participé en la creación de la Rama Estudiantil IEEE en ITESCAM.</li>
               <li>Representé la rama en reuniones con otras ramas y organismos IEEE en México.</li>
             </ul>
-            <button class="tl-toggle" onclick="toggleAchievements(this)">+ Ver logros</button>
           </div>
         </div>
 
@@ -1093,7 +1096,6 @@
             <ul class="tl-achievements">
               <li>Colaboré con otras organizaciones para promover la diversidad y equidad de género en IEEE.</li>
             </ul>
-            <button class="tl-toggle" onclick="toggleAchievements(this)">+ Ver logros</button>
           </div>
         </div>
 
@@ -1436,12 +1438,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  /* ── TOGGLE ACHIEVEMENTS ── */
-  window.toggleAchievements = function(btn) {
-    var ul = btn.previousElementSibling;
-    ul.classList.toggle('open');
-    btn.textContent = ul.classList.contains('open') ? '− Ocultar logros' : '+ Ver logros';
-  };
+
 
   /* ── YEAR ── */
   var cY = document.getElementById('currentYear');
